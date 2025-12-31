@@ -10,14 +10,10 @@ import {
   TrendingUp,
   Users,
   Zap,
-  Globe,
-  ChevronDown,
-  ChevronUp,
   ExternalLink,
   Terminal,
   Server,
-  Database,
-  BarChart
+  Database
 } from 'lucide-react';
 
 // --- Types & Interfaces ---
