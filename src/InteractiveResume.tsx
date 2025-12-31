@@ -638,6 +638,101 @@ const RESUME_DATA = {
   ] as Kudo[]
 };
 
+// --- Layman Mode Translations ---
+// Maps technical jargon to accessible language for non-technical audiences
+
+const LAYMAN_CONTENT = {
+  profile: {
+    title: "Software Engineer ensuring Google's services stay online",
+    tagline: "Making AI products reliable & keeping systems running smoothly at scale.",
+    summary: "Dedicated engineer with 6+ years of experience keeping critical services running. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
+  },
+  metrics: [
+    { label: "Peer Bonuses", value: "43", desc: "Recognized by colleagues for teamwork & impact" },
+    { label: "Impact", value: "30+", unit: "Years Saved", desc: "Engineering time saved through my tools" },
+    { label: "Speed", value: "50%", unit: "Faster", desc: "Made image loading twice as fast" },
+    { label: "Scale", value: "500+", unit: "Databases", desc: "Enabled safe updates across systems" },
+  ],
+  experience: {
+    "google-gemini": {
+      role: "Engineer ensuring AI products (Gemini, Imagen) stay reliable",
+      description: "Leading efforts to keep Google Cloud's AI products running smoothly for customers.",
+      impact_points: [
+        "Automated a months-long setup process for new data centers, now takes days.",
+        "Saved ~30 years of engineering work and freed up expensive AI chips by identifying unused resources.",
+        "Pioneered using AI to help diagnose and fix problems faster during outages.",
+        "Created safeguards to prevent systems from running out of computing resources."
+      ]
+    },
+    "google-network": {
+      role: "Engineer ensuring Google's network stays healthy",
+      description: "Keeping Google's global internet infrastructure monitored and reliable.",
+      impact_points: [
+        "Worked effectively in a fast-changing environment while keeping systems stable.",
+        "Collaborated with network teams to improve visibility into system health.",
+        "Built tools to better monitor and alert on network issues.",
+        "Contributed to infrastructure supporting Google's worldwide operations."
+      ]
+    },
+    "google-switzerland": {
+      role: "Engineer building tools for system reliability",
+      description: "Continued building reliability tools and mentoring from Google's Zurich office.",
+      impact_points: [
+        "Expanded an investigation tool I created, now used across Google engineering teams.",
+        "Mentored junior engineers and shared knowledge across international offices.",
+        "Contributed to company-wide reliability improvement projects.",
+        "Prepared for and executed a smooth transition to a new US-based team."
+      ]
+    },
+    "google-serverless": {
+      role: "Engineer for Google Cloud's app hosting services",
+      description: "Made Cloud Run, Cloud Functions, and App Engine more reliable.",
+      impact_points: [
+        "Reduced on-call emergency work by over 50% by making data more accessible.",
+        "Enabled safe, gradual updates for 500+ databases, preventing major outages.",
+        "Created 'Khoj' — an automated problem-investigation tool now used company-wide and still maintained today.",
+        "Led the emergency response to a critical security vulnerability (Log4j) for our products."
+      ]
+    },
+    "khoj-project": {
+      role: "Creator of automated investigation tool",
+      description: "Built and continuously improved a tool that automatically finds the cause of system problems.",
+      impact_points: [
+        "Conceived and built Khoj in 2021 to automate tedious problem investigation.",
+        "The tool connects logs, measurements, and changes to surface likely causes during outages.",
+        "Adopted company-wide across engineering teams, significantly speeding up problem diagnosis.",
+        "Continuously maintained and improved over 4+ years, adapting to new systems."
+      ]
+    },
+    "booking": {
+      role: "Software Developer",
+      description: "Built tools for machine learning and image processing.",
+      impact_points: [
+        "Made images load 50% faster and reduced storage costs by 80% with on-demand image resizing.",
+        "Built platform features used by 200+ data scientists.",
+        "Migrated image processing to Google Cloud, improving scalability."
+      ]
+    },
+    "education": {
+      role: "Bachelor's in Computer Science",
+      description: "Premier research university, ranked among top computer science programs in India.",
+      impact_points: [
+        "ACM ICPC Regional Finalist (2014, 2015) — top competitive programmer in Asia.",
+        "JEE Mains Rank 719 (Top 0.05%) out of 1.4 million students nationwide.",
+        "National Talent Scholar — recognized for academic excellence.",
+        "CodeChef Campus Chapter Ambassador — organized coding competitions.",
+        "Teaching Assistant for Algorithms & Data Structures courses."
+      ]
+    }
+  },
+  skills: {
+    "Programming": { name: "Programming Languages", skills: ["Python", "Go", "Java", "C++", "SQL", "Shell Scripts"] },
+    "SRE & Cloud": { name: "Reliability & Cloud", skills: ["Container Orchestration", "Infrastructure as Code", "Build Systems", "Google Cloud", "Emergency Response", "System Monitoring"] },
+    "AI & ML": { name: "AI & Machine Learning", skills: ["AI Platform Management", "Large Language Models", "AI Assistants", "Model Deployment", "GPU/TPU Management"] },
+    "Tools": { name: "Data & Tools", skills: ["Configuration Management", "Distributed Databases", "Key-Value Stores", "Metrics & Monitoring"] }
+  }
+};
+
 // --- Components ---
 
 const Card = ({ children, className = "", onClick }: { children: React.ReactNode, className?: string, onClick?: () => void }) => (
@@ -689,7 +784,8 @@ const FilterChip = ({
 );
 
 export default function InteractiveResume() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [techSpeak, setTechSpeak] = useState(true); // true = technical, false = layman
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<'all' | 'experience' | 'skills' | 'kudos'>('all');
   const [kudosTeamFilter, setKudosTeamFilter] = useState<string | null>(null);
@@ -830,6 +926,21 @@ export default function InteractiveResume() {
               </div>
             </div>
 
+            {/* Layman/Tech Toggle */}
+            <button
+              onClick={() => setTechSpeak(!techSpeak)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                techSpeak
+                  ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-700'
+                  : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700'
+              }`}
+              aria-label={techSpeak ? 'Switch to simple language' : 'Switch to technical language'}
+              title={techSpeak ? 'Click for simpler language' : 'Click for technical details'}
+            >
+              <Code size={14} />
+              {techSpeak ? 'Tech' : 'Simple'}
+            </button>
+
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="p-2.5 rounded-full text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
@@ -851,12 +962,12 @@ export default function InteractiveResume() {
               {RESUME_DATA.profile.name}
             </h1>
             <p className="text-xl sm:text-2xl text-gray-700 dark:text-slate-300 font-medium">
-              {RESUME_DATA.profile.title}
+              {techSpeak ? RESUME_DATA.profile.title : LAYMAN_CONTENT.profile.title}
             </p>
           </div>
 
           <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-slate-400 leading-relaxed">
-            {RESUME_DATA.profile.tagline}
+            {techSpeak ? RESUME_DATA.profile.tagline : LAYMAN_CONTENT.profile.tagline}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600 dark:text-slate-400">
@@ -886,18 +997,21 @@ export default function InteractiveResume() {
 
         {/* Key Metrics Grid */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {RESUME_DATA.metrics.map((metric, idx) => (
-            <Card key={idx} className="flex flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 hover:scale-[1.02]">
-              <div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl mb-4 text-blue-600 dark:text-blue-400 shadow-sm">
-                {metric.icon}
-              </div>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
-                {metric.value}<span className="text-sm font-medium text-gray-500 dark:text-slate-400 ml-1">{metric.unit}</span>
-              </div>
-              <div className="text-sm font-semibold text-gray-700 dark:text-slate-300">{metric.label}</div>
-              <div className="text-xs text-gray-500 dark:text-slate-400 mt-2 leading-relaxed">{metric.desc}</div>
-            </Card>
-          ))}
+          {RESUME_DATA.metrics.map((metric, idx) => {
+            const displayMetric = techSpeak ? metric : { ...metric, ...LAYMAN_CONTENT.metrics[idx] };
+            return (
+              <Card key={idx} className="flex flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 hover:scale-[1.02]">
+                <div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl mb-4 text-blue-600 dark:text-blue-400 shadow-sm">
+                  {metric.icon}
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+                  {displayMetric.value}<span className="text-sm font-medium text-gray-500 dark:text-slate-400 ml-1">{displayMetric.unit}</span>
+                </div>
+                <div className="text-sm font-semibold text-gray-700 dark:text-slate-300">{displayMetric.label}</div>
+                <div className="text-xs text-gray-500 dark:text-slate-400 mt-2 leading-relaxed">{displayMetric.desc}</div>
+              </Card>
+            );
+          })}
         </section>
 
         {/* Tab Navigation */}
@@ -928,44 +1042,51 @@ export default function InteractiveResume() {
             </div>
 
             <div className="relative border-l-2 border-gray-200 dark:border-slate-700 ml-4 md:ml-6 space-y-12">
-              {filteredExperience.map((job) => (
-                <div key={job.id} className="relative pl-8 md:pl-12">
-                  {/* Timeline Dot */}
-                  <div className="absolute -left-[11px] top-0 bg-gray-50 dark:bg-slate-900 p-1 rounded-full">
-                    <div className={`w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-900 ${job.type === 'work' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-purple-500 to-pink-500'}`} />
-                  </div>
+              {filteredExperience.map((job) => {
+                const laymanJob = LAYMAN_CONTENT.experience[job.id as keyof typeof LAYMAN_CONTENT.experience];
+                const displayRole = techSpeak ? job.role : (laymanJob?.role || job.role);
+                const displayDesc = techSpeak ? job.description : (laymanJob?.description || job.description);
+                const displayPoints = techSpeak ? job.impact_points : (laymanJob?.impact_points || job.impact_points);
 
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3">
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{job.company}</h3>
-                      <div className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{job.role}</div>
+                return (
+                  <div key={job.id} className="relative pl-8 md:pl-12">
+                    {/* Timeline Dot */}
+                    <div className="absolute -left-[11px] top-0 bg-gray-50 dark:bg-slate-900 p-1 rounded-full">
+                      <div className={`w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-900 ${job.type === 'work' ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-purple-500 to-pink-500'}`} />
                     </div>
-                    <div className="text-right mt-1 sm:mt-0">
-                      <div className="text-sm font-mono text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 px-2 py-0.5 rounded inline-block">{job.period}</div>
-                      <div className="text-xs text-gray-500 dark:text-slate-500 mt-1">{job.location}</div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{job.company}</h3>
+                        <div className="text-lg text-blue-600 dark:text-blue-400 font-semibold">{displayRole}</div>
+                      </div>
+                      <div className="text-right mt-1 sm:mt-0">
+                        <div className="text-sm font-mono text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 px-2 py-0.5 rounded inline-block">{job.period}</div>
+                        <div className="text-xs text-gray-500 dark:text-slate-500 mt-1">{job.location}</div>
+                      </div>
+                    </div>
+
+                    <p className="text-gray-600 dark:text-slate-300 mb-4 italic border-l-2 border-gray-200 dark:border-slate-600 pl-3">
+                      {displayDesc}
+                    </p>
+
+                    <ul className="space-y-2.5 mb-4">
+                      {displayPoints.map((point, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-gray-700 dark:text-slate-300">
+                          <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+                          <span className="leading-relaxed">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap gap-2">
+                      {job.skills.map(skill => (
+                        <Badge key={skill} color="blue">{skill}</Badge>
+                      ))}
                     </div>
                   </div>
-
-                  <p className="text-gray-600 dark:text-slate-300 mb-4 italic border-l-2 border-gray-200 dark:border-slate-600 pl-3">
-                    {job.description}
-                  </p>
-
-                  <ul className="space-y-2.5 mb-4">
-                    {job.impact_points.map((point, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-gray-700 dark:text-slate-300">
-                        <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
-                        <span className="leading-relaxed">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-wrap gap-2">
-                    {job.skills.map(skill => (
-                      <Badge key={skill} color="blue">{skill}</Badge>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
 
               {filteredExperience.length === 0 && (
                 <div className="pl-12 text-gray-500 dark:text-slate-500 italic">No experience found matching "{searchQuery}"</div>
@@ -985,26 +1106,32 @@ export default function InteractiveResume() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {filteredSkills.map((category) => (
-                <Card key={category.name} className="flex flex-col h-full hover:border-purple-300 dark:hover:border-purple-500">
-                  <div className="flex items-center gap-3 mb-4 text-gray-900 dark:text-white font-semibold">
-                    <div className="p-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700 dark:to-slate-800 rounded-lg text-gray-600 dark:text-slate-300 shadow-sm">
-                      {category.icon}
+              {filteredSkills.map((category) => {
+                const laymanCat = LAYMAN_CONTENT.skills[category.name as keyof typeof LAYMAN_CONTENT.skills];
+                const displayName = techSpeak ? category.name : (laymanCat?.name || category.name);
+                const displaySkills = techSpeak ? category.skills : (laymanCat?.skills || category.skills);
+
+                return (
+                  <Card key={category.name} className="flex flex-col h-full hover:border-purple-300 dark:hover:border-purple-500">
+                    <div className="flex items-center gap-3 mb-4 text-gray-900 dark:text-white font-semibold">
+                      <div className="p-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700 dark:to-slate-800 rounded-lg text-gray-600 dark:text-slate-300 shadow-sm">
+                        {category.icon}
+                      </div>
+                      {displayName}
                     </div>
-                    {category.name}
-                  </div>
-                  <div className="flex flex-wrap gap-2 content-start">
-                    {category.skills.map(skill => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1.5 text-sm bg-gray-50 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </Card>
-              ))}
+                    <div className="flex flex-wrap gap-2 content-start">
+                      {displaySkills.map(skill => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 text-sm bg-gray-50 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-lg text-gray-700 dark:text-slate-300 font-medium hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
           </section>
         )}
