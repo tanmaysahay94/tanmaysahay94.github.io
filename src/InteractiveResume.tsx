@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import { buildScramble, bubbleSortStep } from './scramble';
 import {
   Search,
   Moon,
@@ -783,6 +784,76 @@ const FilterChip = ({
   </button>
 );
 
+// Scramble/unscramble animation to protect PII from bots
+// Adapted from scramble.js by Jeff Donahue (2011)
+const ScrambledText = ({ text, href }: { text: string; href: string }) => {
+  const [state, setState] = useState(() => {
+    const init = buildScramble(text);
+    return { display: init.display, indices: init.indices, isRevealed: false };
+  });
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const bookmarkRef = useRef<[number]>([0]);
+  const changedRef = useRef<[boolean]>([false]);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const startUnscramble = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    bookmarkRef.current = [0];
+    changedRef.current = [false];
+
+    intervalRef.current = setInterval(() => {
+      setState(prev => {
+        if (prev.isRevealed) {
+          if (intervalRef.current) clearInterval(intervalRef.current);
+          return prev;
+        }
+        const result = bubbleSortStep(
+          { display: prev.display, indices: prev.indices },
+          bookmarkRef.current,
+          changedRef.current,
+        );
+        if (result.done) {
+          if (intervalRef.current) clearInterval(intervalRef.current);
+          return { display: result.state.display, indices: result.state.indices, isRevealed: true };
+        }
+        return { display: result.state.display, indices: result.state.indices, isRevealed: false };
+      });
+    }, 12);
+  }, []);
+
+  return (
+    <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm font-mono text-xs sm:text-sm">
+      <ExternalLink size={14} />
+      {state.isRevealed ? (
+        <a
+          href={href}
+          target={!href.startsWith('mailto:') && !href.startsWith('tel:') ? '_blank' : undefined}
+          rel="noreferrer"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          {state.display}
+        </a>
+      ) : (
+        <>
+          <span>{state.display}</span>
+          {' '}
+          <button
+            onClick={startUnscramble}
+            className="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer text-xs"
+          >
+            unscramble
+          </button>
+        </>
+      )}
+    </span>
+  );
+};
+
 export default function InteractiveResume() {
   const [darkMode, setDarkMode] = useState(true);
   const [techSpeak, setTechSpeak] = useState(true); // true = technical, false = layman
@@ -971,17 +1042,10 @@ export default function InteractiveResume() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600 dark:text-slate-400">
-            {Object.entries(RESUME_DATA.profile.contact).map(([key, val]) => (
-              <a
-                key={key}
-                href={key === 'email' ? `mailto:${val}` : `https://${val}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 transition-all shadow-sm"
-              >
-                <ExternalLink size={14} /> {val}
-              </a>
-            ))}
+            {Object.entries(RESUME_DATA.profile.contact).map(([key, val]) => {
+              const href = key === 'email' ? `mailto:${val}` : key === 'phone' ? `tel:${val}` : `https://${val}`;
+              return <ScrambledText key={key} text={val} href={href} />;
+            })}
           </div>
 
           {/* Spoken Languages */}
