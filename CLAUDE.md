@@ -8,15 +8,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev        # Vite dev server with HMR
 npm run build      # TypeScript type-check (tsc -b) + Vite production build
 npm run lint       # ESLint with TypeScript + React hooks rules
-npm run preview    # Preview production build locally
 npm run test       # Vitest (single run)
-npm run deploy     # Build + deploy to GitHub Pages (gh-pages -d dist -b main)
+npm run preview    # Preview production build locally
 npx vitest run src/scramble.test.ts  # Run a single test file
 ```
 
+## Deployment
+
+**Pushing to `main` deploys to production.** GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to GitHub Pages automatically on every push to main. There is no separate deploy command.
+
+Do NOT use `gh-pages` or any script that force-pushes build output to `main` — this will wipe out the source code.
+
+## Verification before push
+
+Always run `npm run lint && npm run build && npm test` before pushing. A pre-push git hook enforces this automatically.
+
 ## Architecture
 
-Single-page React 19 + TypeScript portfolio site built with Vite. Deployed to GitHub Pages at https://tanmaysahay94.github.io/.
+Single-page React 19 + TypeScript portfolio site built with Vite. Deployed to GitHub Pages at https://tanmaysahay.com/.
 
 ### Key design decisions
 
@@ -41,3 +50,10 @@ Single-page React 19 + TypeScript portfolio site built with Vite. Deployed to Gi
 ### TypeScript config
 
 Strict mode enabled with `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`. Target ES2022, JSX automatic transform.
+
+### React 19 lint rules
+
+ESLint enforces strict React 19 purity rules. Common pitfalls:
+- **No `Math.random()` in `useMemo`** — impure functions during render are errors. Use `useState(() => ...)` lazy initializer instead.
+- **No ref access during render** — reading/writing `ref.current` in the component body (outside effects/handlers) is an error.
+- **No `setState` in effects** — calling setState synchronously in `useEffect` is an error. Use lazy `useState` initializers or restructure logic into event handlers.

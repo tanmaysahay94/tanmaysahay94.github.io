@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Running pre-push checks (lint, build, test)..."
+npm run lint && npm run build && npm test
