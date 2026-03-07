@@ -1040,6 +1040,9 @@ export default function InteractiveResume() {
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans antialiased ${darkMode ? 'dark bg-slate-900 text-slate-100' : 'bg-gray-50 text-gray-900'}`}>
 
+      {/* Aurora Borealis background */}
+      <div className="aurora"><div className="aurora-layer" /></div>
+
       {/* Header / Nav */}
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/90 border-b border-gray-200 dark:border-slate-800 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1093,7 +1096,7 @@ export default function InteractiveResume() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
 
         {/* Hero Section */}
         <section className="text-center space-y-6 animate-fadeIn py-4">

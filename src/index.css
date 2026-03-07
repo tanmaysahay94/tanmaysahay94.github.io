@@ -3,6 +3,123 @@
 /* Enable class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Aurora Borealis background */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora::before,
+.aurora::after,
+.aurora .aurora-layer {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  will-change: transform;
+}
+
+/* Curtain 1: green/teal — the classic aurora band */
+.aurora::before {
+  background: linear-gradient(
+    170deg,
+    transparent 20%,
+    rgba(0, 255, 128, 0.10) 30%,
+    rgba(0, 200, 150, 0.16) 38%,
+    rgba(0, 255, 180, 0.07) 45%,
+    transparent 55%
+  );
+  animation: aurora-drift-1 23s ease-in-out infinite alternate;
+}
+
+/* Curtain 2: purple/violet — upper atmosphere glow */
+.aurora::after {
+  background: linear-gradient(
+    185deg,
+    transparent 25%,
+    rgba(120, 0, 255, 0.08) 35%,
+    rgba(180, 60, 255, 0.13) 42%,
+    rgba(100, 0, 200, 0.06) 50%,
+    transparent 60%
+  );
+  animation: aurora-drift-2 31s ease-in-out infinite alternate;
+}
+
+/* Curtain 3: teal/cyan — lower shimmer */
+.aurora .aurora-layer {
+  background: linear-gradient(
+    175deg,
+    transparent 30%,
+    rgba(0, 180, 220, 0.08) 40%,
+    rgba(0, 220, 200, 0.12) 46%,
+    rgba(0, 150, 180, 0.05) 52%,
+    transparent 62%
+  );
+  animation: aurora-drift-3 37s ease-in-out infinite alternate;
+}
+
+/* Light mode: much subtler */
+:not(.dark) .aurora::before {
+  background: linear-gradient(
+    170deg,
+    transparent 20%,
+    rgba(0, 200, 128, 0.03) 30%,
+    rgba(0, 180, 150, 0.05) 38%,
+    rgba(0, 200, 160, 0.02) 45%,
+    transparent 55%
+  );
+}
+
+:not(.dark) .aurora::after {
+  background: linear-gradient(
+    185deg,
+    transparent 25%,
+    rgba(120, 0, 255, 0.02) 35%,
+    rgba(180, 60, 255, 0.04) 42%,
+    rgba(100, 0, 200, 0.02) 50%,
+    transparent 60%
+  );
+}
+
+:not(.dark) .aurora .aurora-layer {
+  background: linear-gradient(
+    175deg,
+    transparent 30%,
+    rgba(0, 180, 220, 0.02) 40%,
+    rgba(0, 200, 200, 0.03) 46%,
+    rgba(0, 150, 180, 0.01) 52%,
+    transparent 62%
+  );
+}
+
+@keyframes aurora-drift-1 {
+  0% { transform: translateY(0%) translateX(0%) rotate(0deg); }
+  33% { transform: translateY(-8%) translateX(3%) rotate(1deg); }
+  66% { transform: translateY(5%) translateX(-4%) rotate(-1deg); }
+  100% { transform: translateY(-3%) translateX(2%) rotate(0.5deg); }
+}
+
+@keyframes aurora-drift-2 {
+  0% { transform: translateY(0%) translateX(0%) rotate(0deg); }
+  25% { transform: translateY(6%) translateX(-5%) rotate(-1.5deg); }
+  50% { transform: translateY(-4%) translateX(3%) rotate(1deg); }
+  75% { transform: translateY(3%) translateX(-2%) rotate(-0.5deg); }
+  100% { transform: translateY(-7%) translateX(4%) rotate(1.5deg); }
+}
+
+@keyframes aurora-drift-3 {
+  0% { transform: translateY(0%) translateX(0%) rotate(0deg); }
+  20% { transform: translateY(-5%) translateX(6%) rotate(1deg); }
+  40% { transform: translateY(7%) translateX(-3%) rotate(-1deg); }
+  60% { transform: translateY(-3%) translateX(-5%) rotate(0.5deg); }
+  80% { transform: translateY(4%) translateX(4%) rotate(-0.5deg); }
+  100% { transform: translateY(-6%) translateX(-2%) rotate(1.5deg); }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
