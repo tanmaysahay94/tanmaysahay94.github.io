@@ -25,7 +25,7 @@ interface Kudo {
   date: string;
   text: string;
   tags: string[];
-  team: 'Vertex AI' | 'Network Infra' | 'Cloud Infra' | 'Serverless' | 'Booking' | 'Cross-team';
+  team: 'Jules' | 'Vertex AI' | 'Network Infra' | 'Cloud Infra' | 'Serverless' | 'Booking' | 'Cross-team';
   theme: 'Technical Excellence' | 'Leadership' | 'Collaboration' | 'Incident Response' | 'Automation' | 'Mentoring' | 'Innovation';
   year: number;
   featured?: boolean;
@@ -54,15 +54,15 @@ interface SkillCategory {
 const RESUME_DATA = {
   profile: {
     name: "Tanmay Sahay",
-    title: "Software Engineer in Site Reliability Engineering",
-    tagline: "Building resilient AI platforms & sustainable operations at scale.",
-    location: "Pittsburgh, PA (relocatable)",
+    title: "Software Engineer — Reliability for AI Systems",
+    tagline: "Making autonomous AI coding reliable, observable, and operable at scale.",
+    location: "Mountain View, CA",
     contact: {
       email: "tanmaysahay94@gmail.com",
       phone: "+1-650-705-7651",
       linkedin: "linkedin.com/in/tanmaysahay"
     },
-    summary: "Customer-obsessed engineer with 6+ years of experience making service operability sustainable. Expert in automating complex infrastructure turnups, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
+    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability, observability, and operability of Jules — Google's autonomous AI coder. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
     languages: ["English", "Hindi", "Kannada", "Sanskrit"]
   },
   metrics: [
@@ -74,15 +74,31 @@ const RESUME_DATA = {
   skills: [
     { name: "Programming", skills: ["Python", "Go", "Java", "C++", "SQL", "Shell"], icon: <Code /> },
     { name: "SRE & Cloud", skills: ["Kubernetes", "Terraform", "Bazel", "GCP", "Incident Response", "Observability"], icon: <Server /> },
-    { name: "AI & ML", skills: ["Vertex AI", "LLM Ops", "Gemini CLI", "Model Serving", "TPU Fleet Mgmt"], icon: <Cpu /> },
+    { name: "AI & ML", skills: ["Vertex AI", "LLM Ops", "Gemini CLI", "AI Agents", "Model Serving", "TPU Fleet Mgmt"], icon: <Cpu /> },
     { name: "Tools", skills: ["Prodspec", "Spanner", "Bigtable", "Prometheus/Monarch"], icon: <Terminal /> }
   ] as SkillCategory[],
   experience: [
     {
+      id: "google-jules",
+      company: "Google",
+      role: "Software Engineer, SRE (Jules — Autonomous AI Coder)",
+      period: "Feb '26 - Present",
+      location: "US-MTV",
+      type: "work",
+      description: "Building and maintaining critical reliability infrastructure & automation for Jules — Google's autonomous AI coding agent (jules.google.com) — ensuring a global userbase can rely on it to be reliable, scalable, and highly performant.",
+      impact_points: [
+        "Building observability pipelines to surface agent health, task success rates, and failure modes — enabling data-driven reliability decisions.",
+        "Designing operability frameworks that make Jules continually easier to operate, maintain, and on-call for.",
+        "Automating turnup processes for new regions and capacity, reducing manual toil and accelerating global expansion.",
+        "Driving change management and capacity management practices to ensure safe, predictable rollouts at scale."
+      ],
+      skills: ["Reliability", "Observability", "Operability", "Turnup Automation", "Change Management", "Capacity Management", "AI Agents", "Python", "Go"]
+    },
+    {
       id: "google-gemini",
       company: "Google",
       role: "Software Engineer, SRE (Gemini & Vertex AI)",
-      period: "Apr '25 - Present",
+      period: "Apr '25 - Jan '26",
       location: "US-PIT",
       type: "work",
       description: "Leading reliability for Google Cloud's LLM offerings (Gemini, Veo, Imagen).",
@@ -644,9 +660,9 @@ const RESUME_DATA = {
 
 const LAYMAN_CONTENT = {
   profile: {
-    title: "Software Engineer ensuring Google's services stay online",
-    tagline: "Making AI products reliable & keeping systems running smoothly at scale.",
-    summary: "Dedicated engineer with 6+ years of experience keeping critical services running. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
+    title: "Software Engineer making AI systems reliable",
+    tagline: "Making autonomous AI coding reliable, observable, and operable at scale.",
+    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Jules — Google's AI coding assistant — reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", desc: "Recognized by colleagues for teamwork & impact" },
@@ -655,6 +671,16 @@ const LAYMAN_CONTENT = {
     { label: "Scale", value: "500+", unit: "Databases", desc: "Enabled safe updates across systems" },
   ],
   experience: {
+    "google-jules": {
+      role: "Engineer keeping Google's AI coding assistant reliable & fast",
+      description: "Building the behind-the-scenes systems that keep Jules (jules.google.com) — Google's AI coder — reliable, fast, and easy to maintain for a global userbase.",
+      impact_points: [
+        "Creating monitoring dashboards so the team can see how the AI is performing and catch problems before users notice.",
+        "Making the service easier to operate day-to-day so engineers spend less time firefighting and more time improving.",
+        "Automating the process of launching the service in new regions so it can reach more developers faster.",
+        "Managing how updates and capacity changes roll out safely, preventing disruptions for users worldwide."
+      ]
+    },
     "google-gemini": {
       role: "Engineer ensuring AI products (Gemini, Imagen) stay reliable",
       description: "Leading efforts to keep Google Cloud's AI products running smoothly for customers.",
@@ -732,6 +758,21 @@ const LAYMAN_CONTENT = {
     "AI & ML": { name: "AI & Machine Learning", skills: ["AI Platform Management", "Large Language Models", "AI Assistants", "Model Deployment", "GPU/TPU Management"] },
     "Tools": { name: "Data & Tools", skills: ["Configuration Management", "Distributed Databases", "Key-Value Stores", "Metrics & Monitoring"] }
   }
+};
+
+// --- Helpers ---
+
+const linkify = (text: string): React.ReactNode => {
+  const url = 'jules.google.com';
+  const idx = text.indexOf(url);
+  if (idx === -1) return text;
+  return (
+    <>
+      {text.slice(0, idx)}
+      <a href={`https://${url}`} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">{url}</a>
+      {text.slice(idx + url.length)}
+    </>
+  );
 };
 
 // --- Components ---
@@ -1131,14 +1172,14 @@ export default function InteractiveResume() {
                     </div>
 
                     <p className="text-gray-600 dark:text-slate-300 mb-4 italic border-l-2 border-gray-200 dark:border-slate-600 pl-3">
-                      {displayDesc}
+                      {linkify(displayDesc)}
                     </p>
 
                     <ul className="space-y-2.5 mb-4">
                       {displayPoints.map((point, i) => (
                         <li key={i} className="flex items-start gap-2.5 text-gray-700 dark:text-slate-300">
                           <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
-                          <span className="leading-relaxed">{point}</span>
+                          <span className="leading-relaxed">{linkify(point)}</span>
                         </li>
                       ))}
                     </ul>
