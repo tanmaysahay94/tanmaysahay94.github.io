@@ -63,7 +63,35 @@ const RESUME_DATA = {
       linkedin: "linkedin.com/in/tanmaysahay"
     },
     summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability, observability, and operability of Jules — Google's autonomous AI coder. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
-    languages: ["English", "Hindi", "Kannada", "Sanskrit"]
+    languages: {
+      families: [
+        {
+          name: "Germanic",
+          languages: [
+            { name: "English", native: "English", emoji: "🇬🇧", proficiency: 5, label: "Native" },
+            { name: "Dutch", native: "Nederlands", emoji: "🇳🇱", proficiency: 3, label: "Conversational" },
+            { name: "German", native: "Deutsch", emoji: "🇩🇪", proficiency: 2, label: "Basic" },
+          ]
+        },
+        {
+          name: "Romance",
+          languages: [
+            { name: "French", native: "Français", emoji: "🇫🇷", proficiency: 3, label: "Conversational" },
+            { name: "Spanish", native: "Español", emoji: "🇪🇸", proficiency: 2, label: "Basic" },
+          ]
+        },
+        {
+          name: "Indo-Aryan",
+          languages: [
+            { name: "Hindi", native: "हिन्दी", emoji: "🇮🇳", proficiency: 5, label: "Native" },
+            { name: "Urdu", native: "اردو", emoji: "🇮🇳", proficiency: 3, label: "Conversational" },
+            { name: "Kannada", native: "ಕನ್ನಡ", emoji: "🇮🇳", proficiency: 4, label: "Fluent" },
+            { name: "Sanskrit", native: "संस्कृतम्", emoji: "🕉️", proficiency: 1, label: "Exposure" },
+          ]
+        },
+      ],
+      scripts: [{ name: "Cyrillic", native: "Кириллица", emoji: "🇷🇺", label: "Can read" }]
+    }
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", icon: <Award className="w-5 h-5" />, desc: "Recognized for impact & collaboration" },
@@ -1089,14 +1117,51 @@ export default function InteractiveResume() {
             })}
           </div>
 
-          {/* Spoken Languages */}
-          <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-500 dark:text-slate-500">
-            <span className="font-medium">Languages:</span>
-            {RESUME_DATA.profile.languages.map((lang, idx) => (
-              <span key={lang}>
-                {lang}{idx < RESUME_DATA.profile.languages.length - 1 ? ' · ' : ''}
-              </span>
-            ))}
+          {/* Language Family Tree — expands on hover */}
+          <div className="group/lang relative max-w-xl mx-auto text-xs text-gray-500 dark:text-slate-500">
+            {/* Collapsed: simple inline summary */}
+            <div className="flex flex-wrap justify-center gap-1.5 group-hover/lang:opacity-0 group-hover/lang:pointer-events-none transition-opacity duration-200">
+              <span className="font-medium">Polyglot:</span>
+              {RESUME_DATA.profile.languages.families.flatMap(f => f.languages).map((lang, idx, arr) => (
+                <span key={lang.name}>{lang.name}{idx < arr.length - 1 ? ' · ' : ''}</span>
+              ))}
+              <span className="text-gray-400 dark:text-slate-600 italic ml-1">hover to explore</span>
+            </div>
+            {/* Expanded: full family tree */}
+            <div className="absolute left-0 right-0 top-0 opacity-0 pointer-events-none group-hover/lang:opacity-100 group-hover/lang:pointer-events-auto transition-opacity duration-200 bg-gray-50/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-sm border border-gray-200/50 dark:border-slate-700/50">
+              <div className="space-y-1.5">
+                {RESUME_DATA.profile.languages.families.map((family, fi) => (
+                  <div key={family.name} className="flex items-start gap-2">
+                    <span className="text-gray-400 dark:text-slate-600 select-none shrink-0 font-mono">{fi < RESUME_DATA.profile.languages.families.length - 1 ? '├─' : '└─'}</span>
+                    <span className="text-gray-400 dark:text-slate-600 w-16 shrink-0 text-right font-medium">{family.name}</span>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      {family.languages.map((lang) => (
+                        <span key={lang.name} className="flex items-center gap-1" title={lang.label}>
+                          {lang.emoji && <span>{lang.emoji}</span>}
+                          <span className="text-gray-600 dark:text-slate-400">{lang.name}</span>
+                          <span className="text-gray-400 dark:text-slate-600 italic">({lang.native})</span>
+                          <span className="flex gap-px">
+                            {Array.from({ length: 5 }, (_, i) => (
+                              <span key={i} className={`inline-block w-1.5 h-1.5 rounded-full ${i < lang.proficiency ? 'bg-blue-500 dark:bg-blue-400' : 'bg-gray-200 dark:bg-slate-700'}`} />
+                            ))}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                {RESUME_DATA.profile.languages.scripts.map((script) => (
+                  <div key={script.name} className="flex items-start gap-2">
+                    <span className="text-gray-400 dark:text-slate-600 select-none shrink-0 font-mono">{'  '}</span>
+                    <span className="text-gray-400 dark:text-slate-600 w-16 shrink-0 text-right font-medium">Scripts</span>
+                    {script.emoji && <span>{script.emoji}</span>}
+                    <span className="text-gray-600 dark:text-slate-400">{script.name}</span>
+                    <span className="text-gray-400 dark:text-slate-600 italic">({script.native})</span>
+                    <span className="text-gray-400 dark:text-slate-500">✓</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
