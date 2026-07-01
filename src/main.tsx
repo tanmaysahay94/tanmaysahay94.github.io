@@ -1,9 +1,11 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { ViteReactSSG } from 'vite-react-ssg/single-page'
 import './index.css'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
+// Single-page static prerender: vite-react-ssg renders <App /> to static HTML at
+// build time (so crawlers/social scrapers get real content) and hydrates on the client.
+export const createRoot = ViteReactSSG(
   <StrictMode>
     <App />
   </StrictMode>,
