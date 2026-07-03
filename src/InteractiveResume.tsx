@@ -14,7 +14,9 @@ import {
   ExternalLink,
   Terminal,
   Server,
-  Database
+  Database,
+  Github,
+  Linkedin
 } from 'lucide-react';
 
 // --- Types & Interfaces ---
@@ -808,11 +810,37 @@ const linkify = (text: string): React.ReactNode => {
 const Card = ({ children, className = "", onClick }: { children: React.ReactNode, className?: string, onClick?: () => void }) => (
   <div
     onClick={onClick}
-    className={`bg-white dark:bg-slate-800 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.06)] dark:shadow-none border border-gray-200/80 dark:border-slate-700 p-6 transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] dark:hover:shadow-lg ${className}`}
+    className={`nb-card bg-white dark:bg-slate-800 rounded-lg p-6 ${className}`}
   >
     {children}
   </div>
 );
+
+// Colored keyword highlights in titles (à la anuragxel.github.io)
+const HighlightedTitle = ({ text }: { text: string }) => {
+  const re = /(Reliability|reliable|AI [Ss]ystems)/g;
+  const parts: React.ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    const isReliability = /^[Rr]elia/.test(m[0]);
+    // Emberline roles: reliability = dusty steel (dependability), AI = clay warmth
+    parts.push(
+      <span
+        key={m.index}
+        className={isReliability
+          ? 'text-purple-600 dark:text-purple-400 font-semibold'
+          : 'text-blue-600 dark:text-blue-400 font-semibold'}
+      >
+        {m[0]}
+      </span>
+    );
+    last = m.index + m[0].length;
+  }
+  parts.push(text.slice(last));
+  return <>{parts}</>;
+};
 
 const Badge = ({ children, color = "blue" }: { children: React.ReactNode, color?: "blue" | "green" | "purple" | "orange" }) => {
   const colors = {
@@ -1100,18 +1128,51 @@ export default function InteractiveResume() {
 
         {/* Hero Section */}
         <section className="text-center space-y-6 animate-fadeIn py-4">
+          <img
+            src="/avatar.jpg"
+            alt="Tanmay Sahay"
+            width={460}
+            height={460}
+            className="nb-frame mx-auto w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover bg-white dark:bg-slate-800"
+          />
+
           <div className="space-y-3">
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent pb-2">
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-[#8a5a1e] via-[#c15f3c] to-[#9d4f5e] dark:from-[#e6b877] dark:via-[#e08b66] dark:to-[#c15f3c] bg-clip-text text-transparent pb-2">
               {RESUME_DATA.profile.name}
             </h1>
             <p className="text-xl sm:text-2xl text-gray-700 dark:text-slate-300 font-medium">
-              {techSpeak ? RESUME_DATA.profile.title : LAYMAN_CONTENT.profile.title}
+              <HighlightedTitle text={techSpeak ? RESUME_DATA.profile.title : LAYMAN_CONTENT.profile.title} />
             </p>
           </div>
 
           <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-slate-400 leading-relaxed">
             {techSpeak ? RESUME_DATA.profile.tagline : LAYMAN_CONTENT.profile.tagline}
           </p>
+
+          <div className="nb-card inline-block max-w-xl rounded-lg bg-indigo-50/90 dark:bg-indigo-950/50 px-5 py-3 text-sm text-left text-gray-700 dark:text-slate-300">
+            <span className="font-bold text-gray-900 dark:text-white">Let's talk:</span>{' '}
+            always up for conversations about reliability, AI infrastructure, and systems
+            that don't page you at 3 a.m.
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="https://github.com/tanmaysahay94"
+              target="_blank"
+              rel="noreferrer"
+              className="nb-card inline-flex items-center gap-2 rounded-lg bg-gray-900 dark:bg-indigo-600 text-white px-4 py-2 text-sm font-semibold"
+            >
+              <Github size={16} /> GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tanmaysahay"
+              target="_blank"
+              rel="noreferrer"
+              className="nb-card inline-flex items-center gap-2 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 px-4 py-2 text-sm font-semibold"
+            >
+              <Linkedin size={16} /> LinkedIn
+            </a>
+          </div>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600 dark:text-slate-400">
             {Object.entries(RESUME_DATA.profile.contact).map(([key, val]) => {
@@ -1173,7 +1234,7 @@ export default function InteractiveResume() {
           {RESUME_DATA.metrics.map((metric, idx) => {
             const displayMetric = techSpeak ? metric : { ...metric, ...LAYMAN_CONTENT.metrics[idx] };
             return (
-              <Card key={idx} className="flex flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 hover:scale-[1.02]">
+              <Card key={idx} className="flex flex-col items-center justify-center text-center p-6">
                 <div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl mb-4 text-blue-600 dark:text-blue-400 shadow-sm">
                   {metric.icon}
                 </div>
@@ -1188,7 +1249,7 @@ export default function InteractiveResume() {
         </section>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center border-b border-gray-200 dark:border-slate-700">
+        <div id="content-tabs" className="flex justify-center border-b border-gray-200 dark:border-slate-700 scroll-mt-20">
           {(['all', 'experience', 'skills', 'kudos'] as const).map((tab) => (
             <button
               key={tab}
@@ -1408,7 +1469,7 @@ export default function InteractiveResume() {
               {/* Kudos Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {displayedKudos.map((kudo) => (
-                  <Card key={kudo.id} className="relative bg-white dark:bg-slate-800 shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-lg hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all">
+                  <Card key={kudo.id} className="relative">
                     <div className="absolute top-4 right-4 text-amber-100 dark:text-slate-700">
                       <Award size={40} />
                     </div>
@@ -1428,7 +1489,7 @@ export default function InteractiveResume() {
                       </span>
                     </div>
 
-                    <p className="text-gray-700 dark:text-slate-300 text-sm leading-relaxed mb-4 relative z-10">
+                    <p className="nb-quote text-gray-700 dark:text-slate-300 text-sm leading-relaxed mb-4 relative z-10 italic">
                       "{kudo.text}"
                     </p>
 
@@ -1460,6 +1521,38 @@ export default function InteractiveResume() {
         )}
 
       </main>
+
+      {/* Floating section-nav pill (à la anuragxel.github.io) */}
+      <nav
+        aria-label="Section navigation"
+        className="fixed bottom-5 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-6 z-50"
+      >
+        <div className="nb-frame flex items-center gap-1 rounded-full bg-white/95 dark:bg-slate-800/95 backdrop-blur px-2 py-1.5">
+          {([
+            ['all', '🏠', 'Home'],
+            ['experience', '⚡', 'Experience'],
+            ['skills', '🛠️', 'Skills'],
+            ['kudos', '💬', 'Kudos'],
+          ] as const).map(([tab, emoji, label]) => (
+            <button
+              key={tab}
+              onClick={() => {
+                setActiveTab(tab);
+                document.getElementById('content-tabs')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
+                activeTab === tab
+                  ? 'bg-gray-900 text-white dark:bg-indigo-600'
+                  : 'text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700'
+              }`}
+              aria-label={`Show ${label} section`}
+            >
+              <span aria-hidden="true">{emoji}</span>
+              <span className="hidden sm:inline">{label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
 
       {/* Footer */}
       <footer className="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 py-12 mt-12">
