@@ -1,7 +1,7 @@
-import InteractiveResume from './InteractiveResume'
+import VariantSite from './variants/VariantSite'
 
 function App() {
-  return <InteractiveResume />
+  return <VariantSite />
 }
 
 export default App

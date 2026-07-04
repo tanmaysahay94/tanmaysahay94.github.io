@@ -1,3 +1,6 @@
+/* eslint-disable react-refresh/only-export-components --
+   Legacy component (replaced by src/variants/) kept as the canonical home of
+   RESUME_DATA and ScrambledText, which the variants import. */
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { buildScramble, bubbleSortStep } from './scramble';
 import {
@@ -53,7 +56,7 @@ interface SkillCategory {
 
 // --- Data Source (Grounded in User Files) ---
 
-const RESUME_DATA = {
+export const RESUME_DATA = {
   profile: {
     name: "Tanmay Sahay",
     title: "Software Engineer — Reliability for AI Systems",
@@ -792,7 +795,7 @@ const LAYMAN_CONTENT = {
 
 // --- Helpers ---
 
-const linkify = (text: string): React.ReactNode => {
+export const linkify = (text: string): React.ReactNode => {
   const url = 'jules.google.com';
   const idx = text.indexOf(url);
   if (idx === -1) return text;
@@ -883,7 +886,7 @@ const FilterChip = ({
 
 // Scramble/unscramble animation to protect PII from bots
 // Adapted from scramble.js by Jeff Donahue (2011)
-const ScrambledText = ({ text, href }: { text: string; href: string }) => {
+export const ScrambledText = ({ text, href }: { text: string; href: string }) => {
   const [state, setState] = useState(() => {
     const init = buildScramble(text);
     return { display: init.display, indices: init.indices, isRevealed: false };
