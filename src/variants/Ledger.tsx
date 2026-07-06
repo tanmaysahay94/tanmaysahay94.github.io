@@ -88,7 +88,7 @@ export default function Ledger({ variant, onSwitch }: { variant: Variant; onSwit
           <ScrambledText text={contact.phone} href={`tel:${contact.phone}`} />
           <a href={PROFILE_LINKS.github}>GitHub</a>
           <a href={PROFILE_LINKS.linkedin}>LinkedIn</a>
-          <a href={PROFILE_LINKS.resume}>Résumé (print-ready)</a>
+          <a href={PROFILE_LINKS.resume}>Résumé (pdf)</a>
         </div>
         <p className="foot">
           One page, three skins — this one is the ledger; a die is rolled on every visit.{' '}

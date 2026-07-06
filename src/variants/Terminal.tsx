@@ -128,8 +128,8 @@ export default function Terminal({ variant, onSwitch }: { variant: Variant; onSw
         </span>
         <Prompt cmd="open resume.pdf" />
         <span className="out">
-          <span className="dim">no static pdf —</span>{' '}
-          <a href={PROFILE_LINKS.resume}>rendering print-ready paper view → /?v=paper</a>
+          <a href={PROFILE_LINKS.resume}>/resume.pdf</a>{' '}
+          <span className="dim">— 34K · LaTeX · phone redacted (unscramble it above)</span>
         </span>
         <Prompt cmd="switch --view" />
         <span className="out">

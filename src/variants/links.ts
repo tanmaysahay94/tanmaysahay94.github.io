@@ -18,6 +18,6 @@ export const PROFILE_LINKS = {
   github: 'https://github.com/tanmaysahay94',
   linkedin: 'https://www.linkedin.com/in/tanmaysahay',
   jules: 'https://jules.google.com',
-  // The Paper variant is the canonical, print-ready résumé.
-  resume: '/?v=paper',
+  // Sanitized build of ~/Sandbox/resume (phone stripped; see memory 2026-07-06).
+  resume: '/resume.pdf',
 };

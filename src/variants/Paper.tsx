@@ -25,8 +25,9 @@ export default function Paper({ variant, onSwitch }: { variant: Variant; onSwitc
           <a href={PROFILE_LINKS.github}>[github]</a>{' '}
           <a href={PROFILE_LINKS.linkedin}>[linkedin]</a>{' '}
           <a href={PROFILE_LINKS.jules}>[jules]</a>{' '}
+          <a href={PROFILE_LINKS.resume}>[resume.pdf]</a>{' '}
           <button className="printlink" onClick={() => window.print()}>
-            [pdf — print this page]
+            [print]
           </button>
         </div>
         <div className="contact-row">
