@@ -10,7 +10,7 @@ export default function Paper({ variant, onSwitch }: { variant: Variant; onSwitc
   const education = RESUME_DATA.experience.find((e) => e.type === 'education');
   const kudos = RESUME_DATA.kudos.slice(0, 6);
   return (
-    <main className="v-paper">
+    <main className="v-paper vt-paper">
       <div className="col">
         <div className="title">
           <h1>
@@ -79,9 +79,7 @@ export default function Paper({ variant, onSwitch }: { variant: Variant; onSwitc
         <h2>
           <span className="n">3</span>Selected peer review
         </h2>
-        <p style={{ fontSize: '14px', color: '#6e6759', fontStyle: 'italic', margin: '0 0 14px' }}>
-          43 peer bonuses, 2019–2025. Six representative reviews:
-        </p>
+        <p className="pub m">43 peer bonuses, 2019–2025. Six representative reviews:</p>
         {kudos.map((k) => (
           <blockquote key={k.id}>
             "{clip(k.text, 220)}"

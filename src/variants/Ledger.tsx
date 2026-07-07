@@ -29,7 +29,7 @@ export default function Ledger({ variant, onSwitch }: { variant: Variant; onSwit
   const kudos = RESUME_DATA.kudos;
   const allLangs = languages.families.flatMap((f) => f.languages.map((l) => l.name));
   return (
-    <main className="v-ledger">
+    <main className="v-ledger vt-ledger">
       <div className="col">
         <VariantSwitch variant={variant} onSwitch={onSwitch} />
         <h1>Tanmay Sahay</h1>

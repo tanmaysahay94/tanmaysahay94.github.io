@@ -32,7 +32,7 @@ export default function Terminal({ variant, onSwitch }: { variant: Variant; onSw
     .flatMap((f) => f.languages.map((l) => LOCALES[l.name] ?? l.name.toLowerCase()))
     .join('  ');
   return (
-    <main className="v-term">
+    <main className="v-term vt-term">
       <div className="term">
         <Prompt cmd="whoami" />
         <span className="out">

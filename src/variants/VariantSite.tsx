@@ -3,6 +3,7 @@ import './variants.css';
 import Ledger from './Ledger';
 import Paper from './Paper';
 import Terminal from './Terminal';
+import CmdK from './CmdK';
 
 export type Variant = 'ledger' | 'paper' | 'terminal';
 const VARIANTS: Variant[] = ['ledger', 'paper', 'terminal'];
@@ -36,7 +37,12 @@ export default function VariantSite() {
   };
 
   const Active = { ledger: Ledger, paper: Paper, terminal: Terminal }[variant];
-  return <Active variant={variant} onSwitch={switchTo} />;
+  return (
+    <>
+      <Active variant={variant} onSwitch={switchTo} />
+      <CmdK variant={variant} onSwitch={switchTo} />
+    </>
+  );
 }
 
 export function VariantSwitch({
@@ -62,6 +68,7 @@ export function VariantSwitch({
       <span className="v-dice" title="A variant is chosen at random on each visit">
         (random on each visit)
       </span>
+      <span className="v-kbd" aria-hidden="true">⌘K</span>
     </nav>
   );
 }
