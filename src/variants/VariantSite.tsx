@@ -13,6 +13,15 @@ import { VARIANTS, NATIVE_VT, isVariant, isTheme, type Variant, type Theme } fro
 export default function VariantSite() {
   const [variant, setVariant] = useState<Variant>('paper');
   const [theme, setTheme] = useState<Theme>('native');
+  const [prefersDark, setPrefersDark] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => setPrefersDark(mq.matches);
+    queueMicrotask(apply);
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   useEffect(() => {
     // queueMicrotask, not requestAnimationFrame: rAF is paused in unfocused
@@ -47,7 +56,10 @@ export default function VariantSite() {
     window.history.replaceState(null, '', url);
   };
 
-  const vtClass = theme === 'native' ? NATIVE_VT[variant] : `vt-${theme}`;
+  const vtClass =
+    theme === 'native' ? NATIVE_VT[variant]
+    : theme === 'auto' ? (prefersDark ? 'vt-dark' : 'vt-light')
+    : `vt-${theme}`;
   const Active = { ledger: Ledger, paper: Paper, terminal: Terminal }[variant];
   return (
     <>

@@ -89,6 +89,37 @@
   --ok: #3ddc84; --bar-text: #99917c;
 }
 
+/* ==== paise-banao core themes (light/dark/midnight/terminal), ported
+   2026-07-06 so ALL pb themes exist here. Deviations from pb source are
+   contrast lifts to OUR stricter floor (link/faint are body text on this
+   site): light link #16a34a→#15803d (4.81:1), dark faint #777→#85858f,
+   midnight faint #565c74→#7e84a0, terminal faint #467046→#66a066.
+   'auto' is a resolver (light/dark via prefers-color-scheme), not a block. ==== */
+.vt-light {
+  --bg: #fafafa; --surface: #f4f6f8; --text: #1f2430; --muted: #475063;
+  --heading: #323a4d; --faint: #6b7280; --link: #15803d; --rule: #d4d9e2;
+  --quote-rule: #b9c0cd; --quote-text: #2b3242; --body2: #3a4356;
+  --ok: #16a34a; --bar-text: #475063;
+}
+.vt-dark {
+  --bg: #0f0f1a; --surface: #1e1e30; --text: #eeeeee; --muted: #999999;
+  --heading: #d6d6e0; --faint: #85858f; --link: #4ade80; --rule: #2d2d44;
+  --quote-rule: #4a4a66; --quote-text: #d0d0da; --body2: #b9b9c6;
+  --ok: #4ade80; --bar-text: #999999;
+}
+.vt-midnight {
+  --bg: #000000; --surface: #0a0a12; --text: #e8eaf2; --muted: #8a90a8;
+  --heading: #d5d9e8; --faint: #7e84a0; --link: #38bdf8; --rule: #16161f;
+  --quote-rule: #2c2c40; --quote-text: #d5d9e8; --body2: #c2c7d9;
+  --ok: #34d399; --bar-text: #8a90a8;
+}
+.vt-terminal {
+  --bg: #050805; --surface: #0a120a; --text: #c8f7c8; --muted: #7dbb7d;
+  --heading: #e0ffe0; --faint: #66a066; --link: #22ff88; --rule: #143014;
+  --quote-rule: #1d4d1d; --quote-text: #b4e8b4; --body2: #a5d9a5;
+  --ok: #22ff88; --bar-text: #7dbb7d;
+}
+
 /* ============ shared switcher ============ */
 .v-switch { font-family: var(--v-mono); font-size: 12px; }
 .v-switch button {

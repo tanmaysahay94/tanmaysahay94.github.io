@@ -2,9 +2,15 @@
 export type Variant = 'ledger' | 'paper' | 'terminal';
 export const VARIANTS: Variant[] = ['ledger', 'paper', 'terminal'];
 
-// The paise-banao design-swarm palettes, orthogonal to layout.
-export type Theme = 'native' | 'brockmann' | 'bulldog' | 'hanko' | 'vanderbilt' | 'aftermarket';
-export const THEMES: Theme[] = ['native', 'brockmann', 'bulldog', 'hanko', 'vanderbilt', 'aftermarket'];
+// The full paise-banao theme roster, orthogonal to layout. 'native' = each
+// variant's own palette; 'auto' resolves to light/dark via prefers-color-scheme.
+export type Theme =
+  | 'native' | 'auto' | 'light' | 'dark' | 'midnight' | 'terminal'
+  | 'brockmann' | 'bulldog' | 'hanko' | 'vanderbilt' | 'aftermarket';
+export const THEMES: Theme[] = [
+  'native', 'auto', 'light', 'dark', 'midnight', 'terminal',
+  'brockmann', 'bulldog', 'hanko', 'vanderbilt', 'aftermarket',
+];
 
 export const NATIVE_VT: Record<Variant, string> = {
   ledger: 'vt-ledger',
