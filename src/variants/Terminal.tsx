@@ -1,5 +1,6 @@
 import { RESUME_DATA, ScrambledText } from '../InteractiveResume';
-import { VariantSwitch, type Variant } from './VariantSite';
+import { VariantSwitch } from './VariantSite';
+import type { VariantProps } from './types';
 import { ROLE_LINKS, PROFILE_LINKS } from './links';
 
 const Prompt = ({ cmd }: { cmd: string }) => (
@@ -23,7 +24,7 @@ const LOCALES: Record<string, string> = {
   Hindi: 'hi_IN', Urdu: 'ur_IN', Kannada: 'kn_IN', Sanskrit: 'sa_IN',
 };
 
-export default function Terminal({ variant, onSwitch }: { variant: Variant; onSwitch: (v: Variant) => void }) {
+export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
   const { contact, languages } = RESUME_DATA.profile;
   const work = RESUME_DATA.experience.filter((e) => e.type !== 'education');
   const education = RESUME_DATA.experience.find((e) => e.type === 'education');
@@ -32,7 +33,7 @@ export default function Terminal({ variant, onSwitch }: { variant: Variant; onSw
     .flatMap((f) => f.languages.map((l) => LOCALES[l.name] ?? l.name.toLowerCase()))
     .join('  ');
   return (
-    <main className="v-term vt-term">
+    <main className={`v-term ${vtClass}`}>
       <div className="term">
         <Prompt cmd="whoami" />
         <span className="out">

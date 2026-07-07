@@ -38,7 +38,10 @@ const FLOORS: Record<string, number> = {
   link: 4.5,
 };
 
-describe.each(['vt-ledger', 'vt-paper', 'vt-term'])('%s tokens', (theme) => {
+// Discover every theme block in the file — new palettes are gated automatically.
+const THEMES = [...new Set([...css.matchAll(/\.(vt-[a-z]+)\s*\{/g)].map((m) => m[1]))];
+
+describe.each(THEMES)('%s tokens', (theme) => {
   const tokens = tokensOf(theme);
 
   it('defines a background', () => {

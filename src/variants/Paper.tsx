@@ -1,16 +1,17 @@
 import { RESUME_DATA, ScrambledText, linkify } from '../InteractiveResume';
-import { VariantSwitch, type Variant } from './VariantSite';
+import { VariantSwitch } from './VariantSite';
+import type { VariantProps } from './types';
 import { ROLE_LINKS, PROFILE_LINKS } from './links';
 
 const clip = (s: string, n: number) => (s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s);
 
-export default function Paper({ variant, onSwitch }: { variant: Variant; onSwitch: (v: Variant) => void }) {
+export default function Paper({ variant, vtClass, onSwitch }: VariantProps) {
   const { contact, languages } = RESUME_DATA.profile;
   const work = RESUME_DATA.experience.filter((e) => e.type !== 'education');
   const education = RESUME_DATA.experience.find((e) => e.type === 'education');
   const kudos = RESUME_DATA.kudos.slice(0, 6);
   return (
-    <main className="v-paper vt-paper">
+    <main className={`v-paper ${vtClass}`}>
       <div className="col">
         <div className="title">
           <h1>

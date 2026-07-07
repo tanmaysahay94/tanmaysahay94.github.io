@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { RESUME_DATA } from '../InteractiveResume';
 import { PROFILE_LINKS } from './links';
-import type { Variant } from './VariantSite';
+import { THEMES, type Theme, type Variant } from './types';
 
 type Action = { id: string; label: string; hint: string; run: () => void };
 
@@ -9,10 +9,16 @@ type Action = { id: string; label: string; hint: string; run: () => void };
 // so nothing here (including the mailto) ever appears in the SSG HTML.
 export default function CmdK({
   variant,
+  vtClass,
+  theme,
   onSwitch,
+  onTheme,
 }: {
   variant: Variant;
+  vtClass: string;
+  theme: Theme;
   onSwitch: (v: Variant) => void;
+  onTheme: (t: Theme) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -48,6 +54,15 @@ export default function CmdK({
       hint: 'view',
       run: () => {
         onSwitch(v);
+        close();
+      },
+    })),
+    ...THEMES.map((t) => ({
+      id: `theme-${t}`,
+      label: `${t === theme ? '● ' : ''}theme: ${t}`,
+      hint: 'theme',
+      run: () => {
+        onTheme(t);
         close();
       },
     })),
@@ -99,7 +114,7 @@ export default function CmdK({
   };
 
   return (
-    <div className={`v-cmdk vt-${variant === 'terminal' ? 'term' : variant}`} onClick={close} role="presentation">
+    <div className={`v-cmdk ${vtClass}`} onClick={close} role="presentation">
       <div
         className="panel"
         role="dialog"

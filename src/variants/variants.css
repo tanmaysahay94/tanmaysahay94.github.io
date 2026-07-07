@@ -54,6 +54,41 @@
   --bar-text: #9a937f;
 }
 
+/* ==== optional themes — the paise-banao design-swarm five (2026-07-06).
+   Orthogonal to layout: any .vt-* can skin any variant. Selected via ⌘K,
+   persisted (ts-theme), deep-linked (?t=). Same token superset as the
+   native three, so the contrast gate covers them automatically. ==== */
+.vt-brockmann {
+  --bg: #ffffff; --surface: #f5f5f3; --text: #0b0b0c; --muted: #5b5b5e;
+  --heading: #3a3a3e; --faint: #6b6b6e; --link: #1b44e0; --rule: #dcdcd8;
+  --quote-rule: #b9b9b4; --quote-text: #2a2a2e; --body2: #3f3f44;
+  --ok: #0b7a3b; --bar-text: #4a4a50;
+}
+.vt-bulldog {
+  --bg: #e8eae3; --surface: #f8f9f4; --text: #17201c; --muted: #44504a;
+  --heading: #2a342e; --faint: #4e5a54; --link: #12405f; --rule: #c9cfc2;
+  --quote-rule: #9fb0a6; --quote-text: #26302a; --body2: #33403a;
+  --ok: #146b3c; --bar-text: #44504a;
+}
+.vt-hanko {
+  --bg: #e5e1d6; --surface: #f6f4ed; --text: #1c1a17; --muted: #544e44;
+  --heading: #33302a; --faint: #5c554a; --link: #26415e; --rule: #cdc7b6;
+  --quote-rule: #d24b36; /* the hanko seal-red, spot use only */
+  --quote-text: #33302a; --body2: #403c33; --ok: #55663f; --bar-text: #544e44;
+}
+.vt-vanderbilt {
+  --bg: #0c1c17; --surface: #143026; --text: #f2e9d0; --muted: #c6bba0;
+  --heading: #e5dbc0; --faint: #9c9179; --link: #c9a45b; --rule: #24483a;
+  --quote-rule: #8a7443; --quote-text: #e5dbc0; --body2: #d8cdb0;
+  --ok: #4fb286; --bar-text: #a89c7f;
+}
+.vt-aftermarket {
+  --bg: #0c0b09; --surface: #16140e; --text: #ece4d2; --muted: #c4baa4;
+  --heading: #ded4be; --faint: #948b76; --link: #ffb000; --rule: #2a2620;
+  --quote-rule: #7a5e20; --quote-text: #ded4be; --body2: #cfc5ad;
+  --ok: #3ddc84; --bar-text: #99917c;
+}
+
 /* ============ shared switcher ============ */
 .v-switch { font-family: var(--v-mono); font-size: 12px; }
 .v-switch button {

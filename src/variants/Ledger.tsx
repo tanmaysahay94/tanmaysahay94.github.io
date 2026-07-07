@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RESUME_DATA, ScrambledText, linkify } from '../InteractiveResume';
-import { VariantSwitch, type Variant } from './VariantSite';
+import { VariantSwitch } from './VariantSite';
+import type { VariantProps } from './types';
 import { ROLE_LINKS, PROFILE_LINKS } from './links';
 
 const Expand = ({ children, label = 'expand' }: { children: React.ReactNode; label?: string }) => {
@@ -23,13 +24,13 @@ const yr = (period: string) => {
   return years[0] ?? period;
 };
 
-export default function Ledger({ variant, onSwitch }: { variant: Variant; onSwitch: (v: Variant) => void }) {
+export default function Ledger({ variant, vtClass, onSwitch }: VariantProps) {
   const { contact, languages } = RESUME_DATA.profile;
   const work = RESUME_DATA.experience;
   const kudos = RESUME_DATA.kudos;
   const allLangs = languages.families.flatMap((f) => f.languages.map((l) => l.name));
   return (
-    <main className="v-ledger vt-ledger">
+    <main className={`v-ledger ${vtClass}`}>
       <div className="col">
         <VariantSwitch variant={variant} onSwitch={onSwitch} />
         <h1>Tanmay Sahay</h1>

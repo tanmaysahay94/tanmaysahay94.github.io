@@ -14,7 +14,7 @@ describe.each([
   ['Terminal', Terminal],
 ] as const)('%s variant', (_name, Component) => {
   it('renders identity, evidence, and the variant switcher', () => {
-    render(<Component variant="paper" onSwitch={noop} />);
+    render(<Component variant="paper" vtClass="vt-paper" onSwitch={noop} />);
     expect(screen.getAllByText(/Tanmay Sahay/).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/43/).length).toBeGreaterThan(0);
     expect(screen.getByRole('button', { name: 'terminal' })).toBeTruthy();
