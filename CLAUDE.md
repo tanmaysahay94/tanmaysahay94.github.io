@@ -25,35 +25,62 @@ Always run `npm run lint && npm run build && npm test` before pushing. A pre-pus
 
 ## Architecture
 
-Single-page React 19 + TypeScript portfolio site built with Vite. Deployed to GitHub Pages at https://tanmaysahay.com/.
+React 19 + TypeScript + Vite, prerendered to static HTML by **vite-react-ssg**
+(the `build` script). Deployed to GitHub Pages at https://tanmaysahay.com/.
 
-### Key design decisions
+### The three-variant system (2026-07 redesign)
 
-- **Monolithic component**: The entire app lives in `src/InteractiveResume.tsx` (~1300 lines). All resume data is co-located as `RESUME_DATA` and `LAYMAN_CONTENT` constants within this file.
-- **No routing or state library**: Tab-based navigation via `useState`. All state is local React hooks (`useState`, `useEffect`, `useMemo`).
-- **Dual-language toggle**: `techSpeak` state switches between technical and layman-friendly descriptions. Two parallel data objects provide the content.
-- **Dark mode default**: Class-based dark mode (`.dark` on `<html>`), defaults to enabled.
-- **Styling**: Tailwind CSS 4 via `@tailwindcss/vite` plugin. No CSS-in-JS. Custom `fadeIn` keyframe in `index.css`.
-- **Icons**: Lucide React for all iconography.
-- **Filtering**: Global search + multi-dimensional kudos filters (team, theme, year). Filtered results are memoized.
+The homepage is one of THREE full "skins" of the same data, **rolled at
+random on every visit** (`?v=` pins one; in-page switcher + ⌘K change it):
 
-### File structure
+- `src/variants/Ledger.tsx` — brutalist calling card (660px, [expand] toggles)
+- `src/variants/Paper.tsx` — serif "paper"; SSG-canonical (crawlers get this);
+  `@media print` makes it the printable résumé
+- `src/variants/Terminal.tsx` — amber SRE console (tmux bar, shell session)
 
-- `src/InteractiveResume.tsx` — All UI, data, types, and logic
-- `src/scramble.ts` — PII scramble/unscramble engine (bubble sort animation to protect contact info from bots)
-- `src/App.tsx` — Thin wrapper exporting InteractiveResume
-- `src/main.tsx` — React 19 entry point with StrictMode
-- `src/index.css` — Global styles and dark mode setup
-- `vite.config.ts` — Vite config with React + Tailwind plugins, `base: '/'`
-- `.github/workflows/deploy.yml` — GitHub Actions: Node 20, build, deploy to Pages
+`src/variants/VariantSite.tsx` owns variant+theme state. The random roll runs
+in `queueMicrotask`, NOT `requestAnimationFrame` (rAF is paused in unfocused
+tabs — background-opened visits would stick on the SSG default).
 
-### TypeScript config
+### Themes (orthogonal axis)
 
-Strict mode enabled with `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`. Target ES2022, JSX automatic transform.
+11 themes × 3 layouts. Token classes `.vt-*` in `src/variants/variants.css`
+are the single source of color truth (paise-banao token contract): layout
+rules consume `var(--token)` only — **a raw hex outside `.vt-*` is a bug**.
+Themes: 3 natives + light/dark/auto/midnight/terminal + the 5 design-swarm
+palettes (brockmann/bulldog/hanko/vanderbilt/aftermarket). Theme persists in
+`localStorage['ts-theme']`, deep-links via `?t=`; variant stays random.
+`src/variants/contrast.test.ts` parses the CSS and CI-fails any text token
+under WCAG 4.5:1 — it discovers `.vt-*` blocks automatically, so new themes
+are gated for free.
 
-### React 19 lint rules
+### Data & content
 
-ESLint enforces strict React 19 purity rules. Common pitfalls:
-- **No `Math.random()` in `useMemo`** — impure functions during render are errors. Use `useState(() => ...)` lazy initializer instead.
-- **No ref access during render** — reading/writing `ref.current` in the component body (outside effects/handlers) is an error.
-- **No `setState` in effects** — calling setState synchronously in `useEffect` is an error. Use lazy `useState` initializers or restructure logic into event handlers.
+- `RESUME_DATA` (and `ScrambledText`, `linkify`) live in
+  `src/InteractiveResume.tsx` — a RETIRED component kept as the data home.
+  All three variants render from it; edit data there, all skins update.
+- Evidence links per role: `src/variants/links.ts` (real URLs only).
+- `public/resume.pdf` — sanitized build (phone stripped) of
+  `~/Sandbox/resume/TanmaySahayTexResume.tex` via tectonic. NOTE: the repo
+  gitignores `*.pdf`; this file is force-added (`git add -f`).
+- Email/phone are NEVER plaintext in static HTML — `ScrambledText`
+  unscrambles on click; the ⌘K "email" action builds its mailto at click
+  time. Keep it that way.
+
+### SEO layer (do not break)
+
+Prerendered `index.html` with full meta/OG/JSON-LD, `robots.txt`,
+`sitemap.xml`, `public/CNAME`. JSON-LD `sameAs` = GitHub + LinkedIn (these
+are the only public profile links; everything else stays scrambled).
+
+## Gotchas
+
+- **React 19 purity lint is strict**: no `Math.random()` in `useMemo`, no
+  `ref.current` in render, no sync `setState` in effect bodies, no assigning
+  `window.location.href` in render-created closures (use `location.assign`).
+- **GH Pages deploys transiently fail** with "Deployment failed, try again
+  later" — not your bug; `gh run rerun <id> --failed` fixes it.
+- Known benign console noise: hydration #418 from ScrambledText (server
+  scramble ≠ client scramble; self-heals).
+- The known-flaky Chrome screenshot pipeline is a capture artifact, not a
+  rendering bug — verify via DOM/text extraction when it blanks.
