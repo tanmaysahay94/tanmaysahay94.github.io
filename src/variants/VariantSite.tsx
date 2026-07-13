@@ -19,8 +19,15 @@ export default function VariantSite() {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const apply = () => setPrefersDark(mq.matches);
     queueMicrotask(apply);
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
+    // Safari <14 lacks addEventListener on MediaQueryList; without this guard
+    // the mount throws and the whole tree unmounts (cross-vendor review 2026-07-13)
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', apply);
+      return () => mq.removeEventListener('change', apply);
+    }
+    type LegacyMQL = { addListener?: (f: () => void) => void; removeListener?: (f: () => void) => void };
+    (mq as unknown as LegacyMQL).addListener?.(apply);
+    return () => (mq as unknown as LegacyMQL).removeListener?.(apply);
   }, []);
 
   useEffect(() => {
