@@ -38,7 +38,7 @@ export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
         <Prompt cmd="whoami" />
         <span className="out">
           <span className="amber">Tanmay Sahay</span> — Software Engineer, SRE{'\n'}
-          Jules (Google's autonomous AI coder) · Mountain View
+          Gemini & Vertex AI (Google DeepMind) · Mountain View
         </span>
         <Prompt cmd="uptime" />
         <span className="out">
@@ -119,9 +119,9 @@ export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
         </span>
         <Prompt cmd="locale -a" />
         <span className="out">{locales}</span>
-        <Prompt cmd="systemctl status jules-reliability" />
+        <Prompt cmd="systemctl status gdm-reliability" />
         <span className="out">
-          <span className="ok">● active (running)</span> since Feb 2026
+          <span className="ok">● active (running)</span> since Apr 2025
         </span>
         <Prompt cmd="contact --unscramble" />
         <span className="out">

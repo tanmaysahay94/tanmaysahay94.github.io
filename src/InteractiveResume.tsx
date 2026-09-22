@@ -60,14 +60,14 @@ export const RESUME_DATA = {
   profile: {
     name: "Tanmay Sahay",
     title: "Software Engineer — Reliability for AI Systems",
-    tagline: "Making autonomous AI coding reliable, observable, and operable at scale.",
+    tagline: "Making frontier AI models and agents reliable, observable, and operable at scale.",
     location: "Mountain View, CA",
     contact: {
       email: "tanmaysahay94@gmail.com",
       phone: "+1-650-705-7651",
       linkedin: "linkedin.com/in/tanmaysahay"
     },
-    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability, observability, and operability of Jules — Google's autonomous AI coder. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
+    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability, observability, and operability of Google DeepMind's Gemini models on Vertex AI and the Jules coding agent. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
     languages: {
       families: [
         {
@@ -112,36 +112,23 @@ export const RESUME_DATA = {
   ] as SkillCategory[],
   experience: [
     {
-      id: "google-jules",
-      company: "Google",
-      role: "Software Engineer, SRE (Jules — Autonomous AI Coder)",
-      period: "Feb '26 - Present",
-      location: "US-MTV",
-      type: "work",
-      description: "Building and maintaining critical reliability infrastructure & automation for Jules — Google's autonomous AI coding agent (jules.google.com) — ensuring a global userbase can rely on it to be reliable, scalable, and highly performant.",
-      impact_points: [
-        "Building observability pipelines to surface agent health, task success rates, and failure modes — enabling data-driven reliability decisions.",
-        "Designing operability frameworks that make Jules continually easier to operate, maintain, and on-call for.",
-        "Automating turnup processes for new regions and capacity, reducing manual toil and accelerating global expansion.",
-        "Driving change management and capacity management practices to ensure safe, predictable rollouts at scale."
-      ],
-      skills: ["Reliability", "Observability", "Operability", "Turnup Automation", "Change Management", "Capacity Management", "AI Agents", "Python", "Go"]
-    },
-    {
       id: "google-gemini",
       company: "Google",
-      role: "Software Engineer, SRE (Gemini & Vertex AI)",
-      period: "Apr '25 - Jan '26",
-      location: "US-PIT",
+      role: "Software Engineer, SRE (Gemini & Vertex AI · Google DeepMind)",
+      period: "Apr '25 - Present",
+      location: "US-MTV",
       type: "work",
-      description: "Leading reliability for Google Cloud's LLM offerings (Gemini, Veo, Imagen).",
+      description: "Leading reliability for Google DeepMind models and agents in production — Gemini, Veo and Imagen on Vertex AI, and Jules, the autonomous AI coding agent (jules.google.com).",
       impact_points: [
-        "Automated months-long turnup process for Vertex AI in new regions.",
+        "Automated months-long turnup process for Vertex AI in new regions, and extended turnup automation to Jules regions and capacity.",
         "Saved Google ~30 SWE-years and relinquished ~7.6k TPUs by enforcing Vertex Endpoint Health.",
         "Pioneered 'Gemini Powered Vertex Operations', using AI to reduce Mean Time To Mitigate (MTTM).",
-        "Designed capacity presubmits preventing Vertex capacity overconsumption."
+        "Designed capacity presubmits preventing Vertex capacity overconsumption.",
+        "Building observability pipelines to surface agent health, task success rates, and failure modes — enabling data-driven reliability decisions.",
+        "Designing operability frameworks that make Jules continually easier to operate, maintain, and on-call for.",
+        "Driving change management and capacity management practices to ensure safe, predictable rollouts at scale."
       ],
-      skills: ["AI/ML", "Automation", "Capacity Planning", "Python", "Go"]
+      skills: ["AI/ML", "AI Agents", "Reliability", "Observability", "Automation", "Capacity Planning", "Change Management", "Python", "Go"]
     },
     {
       id: "google-network",
@@ -311,8 +298,8 @@ export const RESUME_DATA = {
 const LAYMAN_CONTENT = {
   profile: {
     title: "Software Engineer making AI systems reliable",
-    tagline: "Making autonomous AI coding reliable, observable, and operable at scale.",
-    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Jules — Google's AI coding assistant — reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
+    tagline: "Making frontier AI models and agents reliable, observable, and operable at scale.",
+    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Google DeepMind's Gemini AI models and the Jules coding assistant reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", desc: "Recognized by colleagues for teamwork & impact" },
@@ -321,24 +308,15 @@ const LAYMAN_CONTENT = {
     { label: "Scale", value: "500+", unit: "Databases", desc: "Enabled safe updates across systems" },
   ],
   experience: {
-    "google-jules": {
-      role: "Engineer keeping Google's AI coding assistant reliable & fast",
-      description: "Building the behind-the-scenes systems that keep Jules (jules.google.com) — Google's AI coder — reliable, fast, and easy to maintain for a global userbase.",
-      impact_points: [
-        "Creating monitoring dashboards so the team can see how the AI is performing and catch problems before users notice.",
-        "Making the service easier to operate day-to-day so engineers spend less time firefighting and more time improving.",
-        "Automating the process of launching the service in new regions so it can reach more developers faster.",
-        "Managing how updates and capacity changes roll out safely, preventing disruptions for users worldwide."
-      ]
-    },
     "google-gemini": {
-      role: "Engineer ensuring AI products (Gemini, Imagen) stay reliable",
-      description: "Leading efforts to keep Google Cloud's AI products running smoothly for customers.",
+      role: "Engineer keeping Google DeepMind's AI models and agents (Gemini, Imagen, Jules) reliable",
+      description: "Leading efforts to keep Google DeepMind's AI products — on Google Cloud and the Jules coding agent — running smoothly for customers.",
       impact_points: [
         "Automated a months-long setup process for new data centers, now takes days.",
         "Saved ~30 years of engineering work and freed up expensive AI chips by identifying unused resources.",
         "Pioneered using AI to help diagnose and fix problems faster during outages.",
-        "Created safeguards to prevent systems from running out of computing resources."
+        "Created safeguards to prevent systems from running out of computing resources.",
+        "Creating monitoring dashboards so the team can see how the AI agent is performing and catch problems before users notice."
       ]
     },
     "google-network": {

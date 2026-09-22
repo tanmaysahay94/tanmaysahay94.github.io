@@ -21,12 +21,11 @@ export default function Paper({ variant, vtClass, onSwitch }: VariantProps) {
           <div className="dev-sub">Reliability for AI Systems</div>
         </div>
         <div className="authorline">
-          Software Engineer, SRE — Jules · <span className="aff">Google, Mountain View</span>
+          Software Engineer, SRE — Gemini &amp; Vertex AI, Google DeepMind · <span className="aff">Google, Mountain View</span>
         </div>
         <div className="links">
           <a href={PROFILE_LINKS.github}>[github]</a>{' '}
           <a href={PROFILE_LINKS.linkedin}>[linkedin]</a>{' '}
-          <a href={PROFILE_LINKS.jules}>[jules]</a>{' '}
           <a href={PROFILE_LINKS.resume}>[resume.pdf]</a>{' '}
           <button className="printlink" onClick={() => window.print()}>
             [print]

@@ -37,7 +37,7 @@ export default function Ledger({ variant, vtClass, onSwitch }: VariantProps) {
         <VariantSwitch variant={variant} onSwitch={onSwitch} />
         <h1>Tanmay Sahay</h1>
         <p className="role">
-          Software Engineer, SRE — <a href="https://jules.google.com">Jules</a>, Google's autonomous AI coder · Mountain View
+          Software Engineer, SRE — Gemini &amp; Vertex AI, Google DeepMind · Mountain View
         </p>
         <p>{RESUME_DATA.profile.summary}</p>
         <h2>Work</h2>

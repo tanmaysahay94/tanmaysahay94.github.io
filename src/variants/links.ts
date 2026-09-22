@@ -1,10 +1,10 @@
 // Evidence links per experience entry — only real, public URLs.
 // (Khoj and the network/Zurich roles are Google-internal: nothing to link.)
 export const ROLE_LINKS: Record<string, { label: string; url: string }[]> = {
-  'google-jules': [{ label: 'jules.google.com', url: 'https://jules.google.com' }],
   'google-gemini': [
     { label: 'vertex ai', url: 'https://cloud.google.com/vertex-ai' },
     { label: 'gemini', url: 'https://gemini.google.com' },
+    { label: 'jules.google.com', url: 'https://jules.google.com' },
   ],
   'google-serverless': [
     { label: 'cloud run', url: 'https://cloud.google.com/run' },
