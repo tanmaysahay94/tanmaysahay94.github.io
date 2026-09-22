@@ -86,14 +86,17 @@ export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
         </span>
         <Prompt cmd='grep -c "peer-bonus" kudos.log' />
         <span className="out">
-          <span className="amber">43</span>
+          <span className="amber">{RESUME_DATA.recognition.total}</span>{' '}
+          <span className="dim">
+            # {RESUME_DATA.recognition.colleagues} colleagues, {RESUME_DATA.recognition.span}
+          </span>
         </span>
         <Prompt cmd="tail -3 kudos.log" />
         <span className="out">
           {RESUME_DATA.kudos.slice(0, 3).map((k) => (
             <span key={k.id}>
               <span className="dim">
-                {k.year} {k.team.toLowerCase().replace(/\s+/g, '-')} {k.sender}:
+                {k.year} {k.team.toLowerCase().replace(/\s+/g, '-')} {k.sender.toLowerCase()}:
               </span>{' '}
               "{clip(k.text, 130)}"{'\n'}
             </span>

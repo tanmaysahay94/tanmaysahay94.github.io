@@ -28,6 +28,8 @@ export default function Ledger({ variant, vtClass, onSwitch }: VariantProps) {
   const { contact, languages } = RESUME_DATA.profile;
   const work = RESUME_DATA.experience;
   const kudos = RESUME_DATA.kudos;
+  const rec = RESUME_DATA.recognition;
+  const themeList = rec.themes.map((t) => `${t.theme} (${t.count})`).join(', ');
   const allLangs = languages.families.flatMap((f) => f.languages.map((l) => l.name));
   return (
     <main className={`v-ledger ${vtClass}`}>
@@ -70,12 +72,12 @@ export default function Ledger({ variant, vtClass, onSwitch }: VariantProps) {
         </ul>
         <h2>Peer recognition</h2>
         <p>
-          43 peer bonuses since 2019 across Serverless, Network Infra, Vertex AI, and cross-team work. The ten
-          most representative: <Expand label="show all ten">
+          {rec.total} peer bonuses, spot bonuses and kudos from {rec.colleagues} colleagues, {rec.span} — for{' '}
+          {themeList}. In their words: <Expand label={`show ${kudos.length}`}>
             <ul>
               {kudos.map((k) => (
                 <li key={k.id}>
-                  · <b>{k.sender}</b> ({k.team}, {k.year}): "{k.text}"
+                  · "{k.text}" — {k.sender.toLowerCase()}, {k.team}, {k.year}
                 </li>
               ))}
             </ul>

@@ -10,6 +10,7 @@ export default function Paper({ variant, vtClass, onSwitch }: VariantProps) {
   const work = RESUME_DATA.experience.filter((e) => e.type !== 'education');
   const education = RESUME_DATA.experience.find((e) => e.type === 'education');
   const kudos = RESUME_DATA.kudos.slice(0, 6);
+  const rec = RESUME_DATA.recognition;
   return (
     <main className={`v-paper ${vtClass}`}>
       <div className="col">
@@ -80,12 +81,15 @@ export default function Paper({ variant, vtClass, onSwitch }: VariantProps) {
         <h2>
           <span className="n">3</span>Selected peer review
         </h2>
-        <p className="pub m">43 peer bonuses, 2019–2025. Six representative reviews:</p>
+        <p className="pub m">
+          {rec.total} peer bonuses, spot bonuses and kudos from {rec.colleagues} colleagues, {rec.span} — for{' '}
+          {rec.themes.map((t) => `${t.theme} (${t.count})`).join(', ')}. In their words:
+        </p>
         {kudos.map((k) => (
           <blockquote key={k.id}>
             "{clip(k.text, 220)}"
             <span className="who">
-              — {k.sender}, {k.team}, {k.year} · {k.theme}
+              — {k.sender.toLowerCase()}, {k.team}, {k.year} · {k.theme}
             </span>
           </blockquote>
         ))}

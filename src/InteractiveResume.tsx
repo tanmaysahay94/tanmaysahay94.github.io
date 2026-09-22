@@ -240,23 +240,28 @@ export const RESUME_DATA = {
       skills: ["Algorithms", "Data Structures", "Competitive Programming", "Problem Solving"]
     }
   ] as ExperienceItem[],
+  // Peer recognition. The source list holds internal IDs, codenames and
+  // colleague names, so only aggregates and a few clean verbatim quotes are
+  // public. Quotes are attributed by team + year, never by name.
+  recognition: {
+    total: 43,
+    colleagues: 37,
+    span: "2019–2025",
+    themes: [
+      { theme: "collaboration", count: 12 },
+      { theme: "technical excellence", count: 10 },
+      { theme: "incident response", count: 8 },
+      { theme: "mentoring", count: 6 },
+      { theme: "leadership", count: 4 },
+      { theme: "innovation", count: 2 },
+      { theme: "automation", count: 1 }
+    ]
+  },
   kudos: [
-    // === VERTEX AI / GEMINI (2025) ===
     {
       id: "kudo-1",
-      sender: "TJ Angelo",
-      date: "Dec 04, 2025",
-      text: "Thank you Tanmay for your contribution to key V1P Initiatives: Groot Turnup Automation Scripting, Observability, Troubleshooting and Incident response Improvements with eCatcher, Fireaxe playbooks, Instructions and prompting guidance on simplifying ops with Gemini CLI, etc.",
-      tags: ["Automation", "AI/ML", "Leadership"],
-      team: "Vertex AI",
-      theme: "Automation",
-      year: 2025,
-      featured: true
-    },
-    {
-      id: "kudo-2",
-      sender: "Himanshu Raj",
-      date: "Sep 30, 2025",
+      sender: "Colleague",
+      date: "2025",
       text: "Thanks Tanmay for introducing me and keeping me up to date with all the innovative things happening in the world of AI. Your presentation on gemini-cli and how to prompt was awesome. Your push towards using AI to automate our operations and investigations will be really impactful for the team.",
       tags: ["AI/ML", "Innovation", "Knowledge Sharing"],
       team: "Vertex AI",
@@ -265,425 +270,37 @@ export const RESUME_DATA = {
       featured: true
     },
     {
+      id: "kudo-2",
+      sender: "Colleague",
+      date: "2022",
+      text: "Thank you for going above and beyond the call of duty in your response to the log4j security vulnerabilities in December 2021. Your commitment to securing Google and our customers is truly appreciated!",
+      tags: ["Security", "Incident Response"],
+      team: "Serverless",
+      theme: "Incident Response",
+      year: 2022,
+      featured: true
+    },
+    {
       id: "kudo-3",
-      sender: "Abhishek Gupta",
-      date: "Aug 07, 2025",
-      text: "Thank you for taking time and providing detailed feedback on the Production Agent insights in IRM. Your valuable insights will help us improve the Outage Investigator experience for all Googlers.",
-      tags: ["Feedback", "UX", "Collaboration"],
-      team: "Cross-team",
+      sender: "Colleague",
+      date: "2022",
+      text: "Being oncall in an understaffed rotation takes time away from your project work and personal life. Thank you Tanmay for enabling our team to persevere through this challenging time!",
+      tags: ["Oncall", "Teamwork"],
+      team: "Serverless",
       theme: "Collaboration",
-      year: 2025
+      year: 2022,
+      featured: true
     },
     {
       id: "kudo-4",
-      sender: "Mark Langer",
-      date: "Jun 30, 2025",
-      text: "Thank you for going above and beyond during my Pittsburgh trip. You had dinner with me every night I was there, organized a small team dinner, and collaborated with me in person. It really added to the welcoming atmosphere I experienced during my time in the Pittsburgh office :)",
-      tags: ["Team Building", "Hospitality", "Collaboration"],
-      team: "Cross-team",
-      theme: "Leadership",
-      year: 2025
-    },
-    {
-      id: "kudo-5",
-      sender: "Kevin Shumaker",
-      date: "Jun 27, 2025",
-      text: "Tanmay has really ramped up this quarter quickly on Autoscaler and metrics work. He's been quick to engage and iterate with dev partners on how to format metrics and dashboards, what debugging looks like and how we can better enable it, and has been excellent at using Taskflow and bug updates to keep the wider audience informed. It's been awesome to see such confident structure introduced to the working group.",
-      tags: ["Autoscaler", "Communication", "Structure"],
-      team: "Vertex AI",
-      theme: "Leadership",
-      year: 2025,
-      featured: true
-    },
-    {
-      id: "kudo-6",
-      sender: "Andrei-Marius Dincu",
-      date: "Jun 19, 2025",
-      text: "Thanks for helping us prepare for ProdEx. We got an overall score of 4/5, which is great! We couldn't get there without your contributions!",
-      tags: ["ProdEx", "Preparation", "Impact"],
-      team: "Vertex AI",
-      theme: "Technical Excellence",
-      year: 2025
-    },
-    {
-      id: "kudo-7",
-      sender: "Himanshu Raj",
-      date: "Jun 09, 2025",
-      text: "Thanks for helping me in setting up taskflow for MMS!",
-      tags: ["Taskflow", "Tooling", "Help"],
-      team: "Vertex AI",
-      theme: "Collaboration",
-      year: 2025
-    },
-    {
-      id: "kudo-8",
-      sender: "Maria Samokhina",
-      date: "Jun 03, 2025",
-      text: "Tanmay, thank you for your work on capacity presubmits. You laid the foundation for capacity presubmits and later improved them to account for models in migration. As a result, we now have an effective mechanism to preventing Vertex capacity overconsumption before it even happens, and saving hours of debugging for many people working with TPU fleet. Thank you very much, this is a game changer.",
-      tags: ["Capacity", "TPU", "Prevention"],
-      team: "Vertex AI",
-      theme: "Technical Excellence",
-      year: 2025,
-      featured: true
-    },
-    {
-      id: "kudo-9",
-      sender: "Antonino Radici",
-      date: "May 21, 2025",
-      text: "Again, another spot bonus for you stepping in and taking the initiative here. I really appreciate the ownership and autonomy in spotting the problem we had with autoscaler numbers and produce a generator that pulled both uniserve actual config and the state in prod. It is true that this will eventually be solved by a control plane call, but your change really increased the quality of life of anybody that, in the future, will edit protoconf.pi. You also worked on it despite this not being part of your OKRs, thanks again!!",
-      tags: ["Autoscaler", "Initiative", "Quality"],
-      team: "Vertex AI",
-      theme: "Technical Excellence",
-      year: 2025
-    },
-    {
-      id: "kudo-10",
-      sender: "Antonino Radici",
-      date: "May 07, 2025",
-      text: "Thanks for being around in irm/i_G9B23gUQ13v66zRreanP and helping me and Lucky with the incident. This was a multiple hours situation where the utilization of gemini 1.5 hit 100% and we couldn't find the chips. Thanks to your help we were able to harvest chips from multiple endpoints until autoscaler finally kicked in!",
-      tags: ["Incident", "Gemini", "Collaboration"],
-      team: "Vertex AI",
-      theme: "Incident Response",
-      year: 2025,
-      featured: true
-    },
-    // === NETWORK INFRA (2024-2025) ===
-    {
-      id: "kudo-11",
-      sender: "Tharindu Bamunuarachchi",
-      date: "Feb 03, 2025",
-      text: "While on B2 WAN OnCall, Tanmay helped GEN to avoid imminent office outage by addressing underlying issues in the router undrain mechanism and undrained it successfully going through multiple obstacles. His effort helped us to avoid imminent office outage.",
-      tags: ["OnCall", "Incident Prevention", "Network"],
-      team: "Network Infra",
-      theme: "Incident Response",
-      year: 2025
-    },
-    {
-      id: "kudo-12",
-      sender: "Yogisai Maramraj",
-      date: "Jan 31, 2025",
-      text: "Thank you for responding and being the 'operator' on omg/79852 after hours! Much appreciated.",
-      tags: ["OnCall", "After Hours", "Responsiveness"],
-      team: "Network Infra",
-      theme: "Incident Response",
-      year: 2025
-    },
-    {
-      id: "kudo-13",
-      sender: "Sierra Ventuleth",
-      date: "Jan 25, 2025",
-      text: "Thank you for being a B2 Postmortem Pre-reviewer and contributing to the preparation and pre-review of postmortems in 2024. This is a volunteer effort and your contributions are appreciated.",
-      tags: ["Postmortem", "Volunteer", "Quality"],
-      team: "Network Infra",
-      theme: "Collaboration",
-      year: 2025
-    },
-    {
-      id: "kudo-14",
-      sender: "Zoltán Németh",
-      date: "Oct 10, 2024",
-      text: "Thank you for your efforts during the B2 SRE TPC Surge, specifically collaborating on critical dashboards needed for overall customer-critical observability on routers, their linecard states, and related metrics. We really stepped up as a team and delivered an important milestone! Thank you again!",
-      tags: ["TPC Surge", "Dashboards", "Observability"],
-      team: "Network Infra",
-      theme: "Collaboration",
-      year: 2024
-    },
-    {
-      id: "kudo-15",
-      sender: "Masha Pospelova",
-      date: "Oct 03, 2024",
-      text: "Thank you Tanmay for your great work migrating B2 Device Linecards dashboard for TPC under extremely challenging circumstances and a very tight timeline. You did an amazing job navigating a truly chaotic environment where everything changes every day, things don't work as expected and one has to follow up with multiple teams at the same time to get unblocked. You successfully collaborated with NetInfra Telemetry team and merged the overlapping work which is something I wasn't able to do on my own. Thank you and keep up the good work!",
-      tags: ["Dashboard", "Migration", "Resilience"],
-      team: "Network Infra",
-      theme: "Collaboration",
-      year: 2024,
-      featured: true
-    },
-    {
-      id: "kudo-16",
-      sender: "Mihai Guran",
-      date: "Sep 14, 2024",
-      text: "Thank you Tanmay for always reviewing my Khoj CLs quickly! I often write CLs and sometimes nobody from my team is able to review them. Tanmay is always very responsive and reviews the CLs and offers great feedback. His help is crucial for making progress quickly on my project.",
-      tags: ["Khoj", "Code Review", "Responsiveness"],
-      team: "Cross-team",
-      theme: "Collaboration",
-      year: 2024,
-      featured: true
-    },
-    {
-      id: "kudo-17",
-      sender: "Zoltán Németh",
-      date: "Sep 11, 2024",
-      text: "Thank you Tanmay for exceptional contributions to the Q3 '24 B2 WAN SRE team Fixit! You were a key person driving redefinition of playbooks while also being a great team resource for Borgmon-Monarch pursuits in track 1. Thank you Tanmay!",
-      tags: ["Fixit", "Playbooks", "Borgmon"],
-      team: "Network Infra",
-      theme: "Leadership",
-      year: 2024
-    },
-    {
-      id: "kudo-18",
-      sender: "Pawel Czepczor",
-      date: "Aug 26, 2024",
-      text: "Thank you for taking most difficult borgmon>monarch bug and giving us example how to proceed with creation of similar metrics.",
-      tags: ["Borgmon", "Monarch", "Metrics"],
-      team: "Network Infra",
-      theme: "Technical Excellence",
-      year: 2024
-    },
-    {
-      id: "kudo-19",
-      sender: "Diana Cortes",
-      date: "Jul 30, 2024",
-      text: "Thank you for volunteering at the last minute to test the new Veto Integration. Your willingness to take the time to test the new safety override feature helped the project maintain momentum while some team members were out of the office. Your time and assistance were greatly appreciated. Keep up the good work!",
-      tags: ["Volunteering", "Testing", "Flexibility"],
-      team: "Network Infra",
-      theme: "Collaboration",
-      year: 2024
-    },
-    {
-      id: "kudo-20",
-      sender: "Loris Marcellini",
-      date: "Jul 03, 2024",
-      text: "Thanks, Tanmay for the follow up, dedication and technical breadth demonstrated as part of your work in b/342078410. Not only you have prevented further issues with Turnup Silencer silencing logic but you have very well represented the entire PG by advocating for SRE principles and prod best practices to be enforced across teams even outside of our PA. PS - you even built a preso about it, with enough details to be almost considered a training slides deck.",
-      tags: ["Turnup Silencer", "SRE Principles", "Documentation"],
-      team: "Network Infra",
-      theme: "Technical Excellence",
-      year: 2024
-    },
-    {
-      id: "kudo-21",
-      sender: "Pawel Czepczor",
-      date: "Jun 27, 2024",
-      text: "Thank you for pointing me in the right direction to quickly address the problem of Monarch alert PREncapsulatedProbesLoss still opening for 100% loss to a peering device.",
-      tags: ["Monarch", "Alerting", "Guidance"],
-      team: "Network Infra",
-      theme: "Technical Excellence",
-      year: 2024
-    },
-    {
-      id: "kudo-22",
-      sender: "Ali Onur Uyar",
-      date: "Apr 02, 2024",
-      text: "Thanks for the proposal on for improving Incident documentation and tagging for B2 WAN SRE (go/b2-wan-tag-nag). I think this is a great approach that should be extended to all B2 SRE.",
-      tags: ["Documentation", "Incident Tagging", "Process"],
-      team: "Network Infra",
-      theme: "Innovation",
-      year: 2024
-    },
-    {
-      id: "kudo-23",
-      sender: "Rob Rockell",
-      date: "Mar 08, 2024",
-      text: "Thank you for your leadership in driving mitigations into our network for omg/70340. Your significant contributions to the planning and execution of our get-well plan resulted in a smooth mitigation and ultimately protected our customers experience. Great work!",
-      tags: ["Leadership", "Mitigation", "Customer Impact"],
-      team: "Network Infra",
-      theme: "Leadership",
-      year: 2024
-    },
-    // === CLOUD INFRA / SWITZERLAND (2023) ===
-    {
-      id: "kudo-24",
-      sender: "Enrique García Torres",
-      date: "Sep 27, 2023",
-      text: "Thank you for your great work on the AMC->MAC migration. Your efforts and attention to detail to this critical part of the project has made a significant contribution to the success of the project. Your work made possible to have a smooth transition. Also, thank you for always looking on different ways to contribute and help others on their tasks.",
-      tags: ["Migration", "Attention to Detail", "Helpfulness"],
-      team: "Cloud Infra",
-      theme: "Technical Excellence",
-      year: 2023,
-      featured: true
-    },
-    {
-      id: "kudo-25",
-      sender: "Codrin Grajdeanu",
-      date: "Mar 15, 2023",
-      text: "Congratulations on finalising Docs SREs alert2bug migration! We would have started missing tickets without this.",
-      tags: ["Alert2Bug", "Migration", "Impact"],
-      team: "Cloud Infra",
-      theme: "Technical Excellence",
-      year: 2023
-    },
-    // === SERVERLESS (2019-2022) ===
-    {
-      id: "kudo-26",
-      sender: "Dora Diao",
-      date: "Dec 08, 2022",
-      text: "Tanmay was my mentor from Serverless Platform team, London site. He introduced and guided me through different internal tools, and walked through with me the problems I had. He was able to commit to frequent 1:1s, and keep me up to date. I appreciate his time and help a lot. Thank you so much for the mentoring during the first three months!",
-      tags: ["Mentoring", "Onboarding", "Guidance"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2022,
-      featured: true
-    },
-    {
-      id: "kudo-27",
-      sender: "Charan Suresh",
-      date: "Oct 14, 2022",
-      text: "Thanks a ton Tanmay!! Tanmay was the SRE who jumped on the Cloud Run Quota Bug which was to address the unplanned sudden quota increase requested by VerSe. Tanmay swiftly acted on the bug being the oncall and stepped in the next day when he wasn't the on-call to duely address customers immediate ask.",
-      tags: ["Cloud Run", "Customer Focus", "Dedication"],
-      team: "Serverless",
-      theme: "Incident Response",
-      year: 2022
-    },
-    {
-      id: "kudo-28",
-      sender: "Anna Ayvazyan",
-      date: "Oct 10, 2022",
-      text: "Tanmay, thanks very much for helping me understand GCL better! I saved tons of time thanks to you!",
-      tags: ["GCL", "Knowledge Sharing", "Time Saving"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2022
-    },
-    {
-      id: "kudo-29",
-      sender: "Joan Grau",
-      date: "Oct 05, 2022",
-      text: "Thanks for being an awesome mentor! You helped me a lot during the onboarding, giving me all the tips and information that I need to understand our products and how we work. I know I always can come to you to ask for help or for any questions I have, and your knowledge and tips are invaluable.",
-      tags: ["Mentoring", "Onboarding", "Accessibility"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2022
-    },
-    {
-      id: "kudo-30",
-      sender: "Aleksej Truhan",
-      date: "Sep 22, 2022",
-      text: "Being oncall in an understaffed rotation takes time away from your project work and personal life. Thank you Tanmay for enabling our team to persevere through this challenging time!",
-      tags: ["OnCall", "Dedication", "Team Support"],
-      team: "Serverless",
-      theme: "Collaboration",
-      year: 2022
-    },
-    {
-      id: "kudo-31",
-      sender: "Harman Dhaliwal",
-      date: "Sep 21, 2022",
-      text: "Thank you for your help in resolving OMG/57103 including unblocking a major customer; you showed exemplary dedication to our customers!",
-      tags: ["Customer Focus", "Incident Resolution", "Dedication"],
-      team: "Serverless",
-      theme: "Incident Response",
-      year: 2022
-    },
-    {
-      id: "kudo-32",
-      sender: "Ashwin Chandrasekher",
-      date: "Mar 02, 2022",
-      text: "Thank you Tanmay for your amazing ongoing contributions towards Oppia.org! Your volunteering spirit has been shining through and thanks to your effort and several others, we have been able to make good progress in making Oppia lessons available in indic languages. Thank you again for everything!",
-      tags: ["Oppia", "Volunteering", "Social Impact"],
-      team: "Cross-team",
-      theme: "Collaboration",
-      year: 2022
-    },
-    {
-      id: "kudo-33",
-      sender: "Anna Ayvazyan",
-      date: "Jan 13, 2022",
-      text: "Thanks Tanmay for giving an insight of our partner GAE Flex dev team's upcoming projects. We, as liaisons, for sure should follow your example and keep the SRE team aware and involved at the earliest stages of development lifecycle. One more step towards the healthy relationship between SRE and Dev. Keep it up!",
-      tags: ["GAE Flex", "SRE-Dev Relations", "Proactive"],
-      team: "Serverless",
-      theme: "Collaboration",
-      year: 2022
-    },
-    {
-      id: "kudo-34",
-      sender: "Philip Beevers",
-      date: "Jan 10, 2022",
-      text: "Thank you for going above and beyond the call of duty in your response to the log4j security vulnerabilities in December 2021. Your commitment to securing Google and our customers is truly appreciated!",
-      tags: ["Log4j", "Security", "Dedication"],
-      team: "Serverless",
-      theme: "Incident Response",
-      year: 2022,
-      featured: true
-    },
-    {
-      id: "kudo-35",
-      sender: "Sergio Rodriguez",
-      date: "Dec 13, 2021",
-      text: "For helping coordinate the Serverless SRE response to the CODE RED in omg/45447 (log4j vulnerability), being responsive and becoming the PA point of contact for go/log4j-pa-irt-tracking over the weekend.",
-      tags: ["Log4j", "Coordination", "Code Red"],
-      team: "Serverless",
-      theme: "Incident Response",
-      year: 2021
-    },
-    {
-      id: "kudo-36",
-      sender: "Yifan Zhu",
-      date: "Sep 24, 2021",
-      text: "Hi Tanmay! We would like to thank you for all the efforts you made to mentor us and help us grow professionally. You were always there to help us out, answer our questions and offer valuable advice. You made our working environment comfortable and we cannot thank you enough for that! Yifan & Pavel",
-      tags: ["Mentoring", "Support", "Growth"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2021
-    },
-    {
-      id: "kudo-37",
-      sender: "Pavel Petrukhin",
-      date: "Sep 24, 2021",
-      text: "Thank you so much for being my co-host during this internship. You provided valuable advice about professional and technical skills. You were always there to help. Your high-level view of the project helped make better design decisions. You did an amazing job as a mentor :)",
-      tags: ["Internship", "Co-host", "Design Guidance"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2021
-    },
-    {
-      id: "kudo-38",
-      sender: "Rahul Sahu",
-      date: "Sep 06, 2021",
-      text: "Hi Tanmay, thank you for being my noogler guide for the past two quarters. You were very kind to accept my request and find a weekly time for us. Your support & insights have helped me understand my role and made my job much easier to perform. Keep up the good work :)",
-      tags: ["Noogler Guide", "Support", "Insights"],
-      team: "Serverless",
-      theme: "Mentoring",
-      year: 2021
-    },
-    {
-      id: "kudo-39",
-      sender: "Steve Jordan",
-      date: "Jul 28, 2021",
-      text: "Thanks for your work on the Pod Spanner migration!",
-      tags: ["Spanner", "Migration", "Infrastructure"],
-      team: "Serverless",
-      theme: "Technical Excellence",
-      year: 2021
-    },
-    {
-      id: "kudo-40",
-      sender: "Wilson Yeung",
-      date: "May 27, 2020",
-      text: "Thank you for helping to resolve omg/19960. You really went above and beyond in a short amount of time in service to our customers. Thank you!",
-      tags: ["Customer Service", "Quick Resolution", "Dedication"],
-      team: "Serverless",
-      theme: "Incident Response",
-      year: 2020
-    },
-    {
-      id: "kudo-41",
-      sender: "JJ Zeng",
-      date: "Sep 20, 2019",
-      text: "The config storage team is in the process of backfilling AppInfos from Bigtable to regional Spanner. We had finished most of the regions, which can be completed in a few hours. But us-central is a bit too large, and will take many days to finish with the restriction to pacific business hours. So we split the jobs into four 15-hours chunks and ask LON SREs to start the jobs so they can finish in SRE core hours and we always have active supervise/investigation. Tanmay stepped up and volunteered to take this job. Everyday this week he started the job, updated the doc, and handed over. We finished without a hiccup. This is a great example of collaboration across the pond.",
-      tags: ["Spanner", "Cross-team", "Collaboration"],
-      team: "Serverless",
-      theme: "Collaboration",
-      year: 2019
-    },
-    {
-      id: "kudo-42",
-      sender: "Chris Raynor",
-      date: "Jun 13, 2019",
-      text: "During the May 2019 GCF Reliability Fix-it you were a significant contributor, thank you. This effort will help reduce time to resolution to GCF incidents and is crucial to GCF oncall rotation's healthiness.",
-      tags: ["GCF", "Reliability", "Fix-it"],
-      team: "Serverless",
-      theme: "Technical Excellence",
-      year: 2019
-    },
-    {
-      id: "kudo-43",
-      sender: "Chris Raynor",
-      date: "Jun 13, 2019",
+      sender: "Colleague",
+      date: "2019",
       text: "For collaborating with Cloud Functions SREs to ensure alignment and shared understanding of observability requirements during the GCF v2 launch preparation.",
-      tags: ["GCF v2", "Observability", "Launch Prep"],
+      tags: ["Observability", "Launch Prep"],
       team: "Serverless",
       theme: "Collaboration",
-      year: 2019
+      year: 2019,
+      featured: true
     }
   ] as Kudo[]
 };
@@ -1385,7 +1002,7 @@ export default function InteractiveResume() {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Peer Recognition</h2>
                     <p className="text-sm text-gray-500 dark:text-slate-500">
-                      {RESUME_DATA.kudos.length} peer bonuses • Showing {displayedKudos.length}
+                      {RESUME_DATA.recognition.total} peer bonuses • Showing {displayedKudos.length}
                     </p>
                   </div>
                 </div>
