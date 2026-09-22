@@ -16,6 +16,6 @@ export const ROLE_LINKS: Record<string, { label: string; url: string }[]> = {
 export const PROFILE_LINKS = {
   github: 'https://github.com/tanmaysahay94',
   linkedin: 'https://www.linkedin.com/in/tanmaysahay',
-  // Sanitized build of ~/Sandbox/resume (phone stripped; see memory 2026-07-06).
+  // Sanitized build of ~/Sandbox/resume/TanmaySahayResume_FrontierLab.tex (phone stripped).
   resume: '/resume.pdf',
 };
