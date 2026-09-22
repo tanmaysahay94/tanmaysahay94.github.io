@@ -132,7 +132,7 @@ export const RESUME_DATA = {
       company: "Google",
       role: "Software Engineer, SRE (Network Infrastructure)",
       period: "Feb '24 - Apr '25",
-      location: "US-PIT",
+      location: "US-MTV",
       type: "work",
       description: "Ensuring reliability for Google's global backbone network telemetry and monitoring systems.",
       impact_points: [
