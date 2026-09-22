@@ -30,7 +30,7 @@ interface Kudo {
   date: string;
   text: string;
   tags: string[];
-  team: 'Jules' | 'Vertex AI' | 'Network Infra' | 'Cloud Infra' | 'Serverless' | 'Booking' | 'Cross-team';
+  team: 'Vertex AI' | 'Network Infra' | 'Cloud Infra' | 'Serverless' | 'Booking' | 'Cross-team';
   theme: 'Technical Excellence' | 'Leadership' | 'Collaboration' | 'Incident Response' | 'Automation' | 'Mentoring' | 'Innovation';
   year: number;
   featured?: boolean;
@@ -60,14 +60,14 @@ export const RESUME_DATA = {
   profile: {
     name: "Tanmay Sahay",
     title: "Software Engineer — Reliability for AI Systems",
-    tagline: "Making frontier AI models and agents reliable, observable, and operable at scale.",
+    tagline: "Making Gemini and Vertex AI LLM serving reliable, observable, and operable at scale.",
     location: "Mountain View, CA",
     contact: {
       email: "tanmaysahay94@gmail.com",
       phone: "+1-650-705-7651",
       linkedin: "linkedin.com/in/tanmaysahay"
     },
-    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability, observability, and operability of Google DeepMind's Gemini models on Vertex AI and the Jules coding agent. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
+    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability of Google DeepMind's Gemini models on Vertex AI — accelerator-backed LLM inference serving. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
     languages: {
       families: [
         {
@@ -114,21 +114,18 @@ export const RESUME_DATA = {
     {
       id: "google-gemini",
       company: "Google",
-      role: "Software Engineer, SRE (Gemini & Vertex AI · Google DeepMind)",
+      role: "Software Engineer, SRE (Gemini & Vertex AI LLM serving · Google DeepMind)",
       period: "Apr '25 - Present",
       location: "US-MTV",
       type: "work",
-      description: "Leading reliability for Google DeepMind models and agents in production — Gemini, Veo and Imagen on Vertex AI, and Jules, the autonomous AI coding agent (jules.google.com).",
+      description: "Making Google Cloud's large language model offerings (Gemini, Veo, Imagen) more reliable. Check out cloud.google.com/vertex-ai",
       impact_points: [
-        "Automated months-long turnup process for Vertex AI in new regions, and extended turnup automation to Jules regions and capacity.",
-        "Saved Google ~30 SWE-years and relinquished ~7.6k TPUs by enforcing Vertex Endpoint Health.",
-        "Pioneered 'Gemini Powered Vertex Operations', using AI to reduce Mean Time To Mitigate (MTTM).",
-        "Designed capacity presubmits preventing Vertex capacity overconsumption.",
-        "Building observability pipelines to surface agent health, task success rates, and failure modes — enabling data-driven reliability decisions.",
-        "Designing operability frameworks that make Jules continually easier to operate, maintain, and on-call for.",
-        "Driving change management and capacity management practices to ensure safe, predictable rollouts at scale."
+        "Reliability owner for accelerator-backed inference serving at frontier-model scale — GPU/TPU fleet capacity, serving-stack rollouts, and the incident path for Gemini, Veo and Imagen traffic.",
+        "Led the migration of Vertex AI's ML model-serving configurations to dedicated hermetic ML-Ops, removing a class of release-time serving outages and materially improving rollout safety.",
+        "Automated the months-long turnup of Vertex AI in new regions, including accelerator capacity validation before traffic admission.",
+        "Built a Gemini-powered incident framework that cuts MTTx through LLM-assisted triage and gated actuation — an agentic system running against live production."
       ],
-      skills: ["AI/ML", "AI Agents", "Reliability", "Observability", "Automation", "Capacity Planning", "Change Management", "Python", "Go"]
+      skills: ["LLM Serving", "GPU/TPU Capacity", "ML-Ops", "Reliability", "Incident Response", "Automation", "Python", "Go"]
     },
     {
       id: "google-network",
@@ -298,8 +295,8 @@ export const RESUME_DATA = {
 const LAYMAN_CONTENT = {
   profile: {
     title: "Software Engineer making AI systems reliable",
-    tagline: "Making frontier AI models and agents reliable, observable, and operable at scale.",
-    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Google DeepMind's Gemini AI models and the Jules coding assistant reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
+    tagline: "Making Gemini and Vertex AI LLM serving reliable, observable, and operable at scale.",
+    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Google DeepMind's Gemini AI models on Vertex AI reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", desc: "Recognized by colleagues for teamwork & impact" },
@@ -309,14 +306,13 @@ const LAYMAN_CONTENT = {
   ],
   experience: {
     "google-gemini": {
-      role: "Engineer keeping Google DeepMind's AI models and agents (Gemini, Imagen, Jules) reliable",
-      description: "Leading efforts to keep Google DeepMind's AI products — on Google Cloud and the Jules coding agent — running smoothly for customers.",
+      role: "Engineer keeping Google DeepMind's AI models (Gemini, Veo, Imagen) reliable",
+      description: "Keeping Google Cloud's large language model offerings running smoothly for customers.",
       impact_points: [
-        "Automated a months-long setup process for new data centers, now takes days.",
-        "Saved ~30 years of engineering work and freed up expensive AI chips by identifying unused resources.",
-        "Pioneered using AI to help diagnose and fix problems faster during outages.",
-        "Created safeguards to prevent systems from running out of computing resources.",
-        "Creating monitoring dashboards so the team can see how the AI agent is performing and catch problems before users notice."
+        "Responsible for keeping the AI chips and servers that answer Gemini, Veo and Imagen requests reliable.",
+        "Moved how AI models are configured for serving onto a safer, self-contained release process, removing a whole class of release-day outages.",
+        "Automated the months-long setup of Vertex AI in new regions, including checking AI-chip capacity before traffic arrives.",
+        "Built a Gemini-powered incident assistant that helps engineers diagnose and fix outages faster."
       ]
     },
     "google-network": {
@@ -391,7 +387,7 @@ const LAYMAN_CONTENT = {
 // --- Helpers ---
 
 export const linkify = (text: string): React.ReactNode => {
-  const url = 'jules.google.com';
+  const url = 'cloud.google.com/vertex-ai';
   const idx = text.indexOf(url);
   if (idx === -1) return text;
   return (

@@ -6,7 +6,11 @@ import { join, relative } from 'node:path';
 // Bug/incident/ticket IDs (b/123456, omg/57103, irm/i_…) and go/ links.
 const INTERNAL_ID = /\b(?:b|omg)\/\d{5,}|\birm\/[A-Za-z0-9_]{5,}|\bgo\/[A-Za-z0-9]/i;
 
+// Retired product names that must not reappear anywhere public.
+const RETIRED = /jules/i;
+
 const SRC = join(__dirname);
+const ROOT = join(__dirname, '..');
 const SELF = relative(SRC, __filename);
 
 function walk(dir: string): string[] {
@@ -27,6 +31,14 @@ describe('public claims guard', () => {
           .filter(({ line }) => INTERNAL_ID.test(line))
           .map(({ at, line }) => `${at}: ${line.trim().slice(0, 80)}`),
       );
+    expect(hits).toEqual([]);
+  });
+
+  it('src/, index.html and public/ text never mention retired product names', () => {
+    const files = [...walk(SRC), join(ROOT, 'index.html'), ...walk(join(ROOT, 'public'))].filter(
+      (p) => /\.(tsx?|css|json|html|txt|xml|svg)$/.test(p) && relative(SRC, p) !== SELF,
+    );
+    const hits = files.filter((p) => RETIRED.test(readFileSync(p, 'utf8'))).map((p) => relative(ROOT, p));
     expect(hits).toEqual([]);
   });
 
