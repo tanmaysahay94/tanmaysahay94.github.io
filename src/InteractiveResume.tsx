@@ -60,14 +60,14 @@ export const RESUME_DATA = {
   profile: {
     name: "Tanmay Sahay",
     title: "Software Engineer — Reliability for AI Systems",
-    tagline: "Making Gemini and Vertex AI LLM serving reliable, observable, and operable at scale.",
+    tagline: "Making LLM serving, networks and serverless platforms reliable, observable, and operable at scale.",
     location: "Mountain View, CA",
     contact: {
       email: "tanmaysahay94@gmail.com",
       phone: "+1-650-705-7651",
       linkedin: "linkedin.com/in/tanmaysahay"
     },
-    summary: "Customer-obsessed engineer with 8+ years of experience making service operability sustainable. Currently focused on reliability of Google DeepMind's Gemini models on Vertex AI — accelerator-backed LLM inference serving. Expert in automating complex infrastructure, reducing operational toil by >50%, and pioneering AI-powered troubleshooting. Proven track record of saving 30+ SWE-years through efficiency optimizations.",
+    summary: "Site reliability engineer with 8+ years in production, at Google since 2019 across three platforms: LLM inference serving for Gemini and Vertex AI (Google DeepMind), Google's network infrastructure, and Google Cloud's serverless platform (Cloud Run, Cloud Functions, App Engine). I automate complex infrastructure, cut my team's oncall load by 50%, and build AI-assisted incident tooling that runs against live production.",
     languages: {
       families: [
         {
@@ -100,9 +100,9 @@ export const RESUME_DATA = {
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", icon: <Award className="w-5 h-5" />, desc: "Recognized for impact & collaboration" },
-    { label: "Impact", value: "30+", unit: "SWE-Years", icon: <Users className="w-5 h-5" />, desc: "Saved via Vertex Endpoint Health" },
+    { label: "Oncall", value: "50%", unit: "Reduction", icon: <Users className="w-5 h-5" />, desc: "Serverless oncall load, with 40% more services" },
     { label: "Latency", value: "50%", unit: "Reduction", icon: <Zap className="w-5 h-5" />, desc: "Image generation at Booking.com" },
-    { label: "Adoption", value: "500+", unit: "Databases", icon: <Database className="w-5 h-5" />, desc: "Safe Spanner rollouts enabled" },
+    { label: "Adoption", value: "560+", unit: "Databases", icon: <Database className="w-5 h-5" />, desc: "Safe Spanner rollouts enabled" },
   ],
   skills: [
     { name: "Programming", skills: ["Python", "Go", "Java", "C++", "SQL", "Shell"], icon: <Code /> },
@@ -136,12 +136,11 @@ export const RESUME_DATA = {
       type: "work",
       description: "Ensuring reliability for Google's global backbone network telemetry and monitoring systems.",
       impact_points: [
-        "Navigated chaotic environment with constantly changing requirements while maintaining system stability.",
-        "Successfully collaborated with NetInfra Telemetry teams to improve network observability.",
-        "Built tooling to enhance network monitoring and alerting capabilities.",
-        "Contributed to infrastructure supporting Google's global network operations."
+        "Built a system that enables Netflix-style chaos-monkey testing for Google's network infrastructure.",
+        "Played a pivotal role in migrating networking from the legacy monitoring system to the next-generation monitoring system.",
+        "Built tooling to enhance network monitoring and alerting capabilities."
       ],
-      skills: ["Networking", "Telemetry", "Observability", "Collaboration", "Python"]
+      skills: ["Networking", "Chaos Engineering", "Monitoring Migration", "Telemetry", "Observability", "Python"]
     },
     {
       id: "google-switzerland",
@@ -152,6 +151,8 @@ export const RESUME_DATA = {
       type: "work",
       description: "Continued driving reliability improvements and tooling development from Zurich.",
       impact_points: [
+        "Seamlessly migrated fragmented internal users from 15-year-old + 4-year-old alert visualization tools to the next-gen tool by adopting the Google-wide experiment framework.",
+        "Shipped the Alert2Bug migration in 1 week against a multi-month estimate by leaning on existing primitives instead of a bespoke rebuild.",
         "Continued development and expansion of Khoj (InvDash), scaling adoption across Google SRE teams.",
         "Mentored junior engineers and drove knowledge transfer across regions.",
         "Contributed to cross-functional infrastructure reliability initiatives.",
@@ -166,12 +167,14 @@ export const RESUME_DATA = {
       period: "Mar '19 - Feb '23",
       location: "UK-LON / CH-ZRH",
       type: "work",
-      description: "Enhanced reliability for Cloud Run, Cloud Functions, and App Engine.",
+      description: "Making Google Cloud's Serverless compute offerings (App Engine, Cloud Functions, Cloud Run) more reliable.",
       impact_points: [
-        "Reduced team's oncall load by over 50% through actionable metrics and democratization of data.",
-        "Enabled safe, slow rollouts for 500+ Spanner databases, preventing global outages.",
-        "Created 'Khoj' (InvDash) in 2021 — an automated incident root-causing system now used Google-wide and still actively maintained.",
-        "Led Log4j Code Red response for Serverless products."
+        "Automated the months-long process of turning up Cloud Run in new regions.",
+        "Enabled safe, progressive rollouts of schema and config changes across 560+ Spanner databases, eliminating the prior failure mode where bad changes affected customers globally for multiple hours.",
+        "Built an actionable-metrics framework that democratized signal across SRE and partner teams, driving a 50% reduction in oncall load while the team onboarded 40% more partner services.",
+        "Drove down resource ceilings across all Serverless Bigtables by adopting Autocap, materially improving fleet-wide compute efficiency.",
+        "Led the Log4J code-red response across four Serverless products under incident pressure.",
+        "Led 4 interns to build Khoj, a Google-wide automated incident root-causing system that reduced mean time to response and mitigation from multiple hours to just minutes."
       ],
       skills: ["Serverless", "Spanner", "Incident Management", "Mentoring"]
     },
@@ -295,14 +298,14 @@ export const RESUME_DATA = {
 const LAYMAN_CONTENT = {
   profile: {
     title: "Software Engineer making AI systems reliable",
-    tagline: "Making Gemini and Vertex AI LLM serving reliable, observable, and operable at scale.",
-    summary: "Dedicated engineer with 8+ years of experience keeping critical services running. Currently focused on making Google DeepMind's Gemini AI models on Vertex AI reliable and well-monitored. I build tools that automate complex tasks, reduce repetitive work by over 50%, and use AI to solve problems faster. My work has saved the equivalent of 30+ years of engineering effort through efficiency improvements."
+    tagline: "Making LLM serving, networks and serverless platforms reliable, observable, and operable at scale.",
+    summary: "Engineer with 8+ years of experience keeping critical services running — at Google since 2019, across Gemini AI models, Google's global network, and Google Cloud's app hosting services. I build tools that automate complex tasks, cut emergency on-call work in half, and use AI to solve problems faster.",
   },
   metrics: [
     { label: "Peer Bonuses", value: "43", desc: "Recognized by colleagues for teamwork & impact" },
-    { label: "Impact", value: "30+", unit: "Years Saved", desc: "Engineering time saved through my tools" },
+    { label: "On-call", value: "50%", unit: "Less", desc: "Half the emergency work, with 40% more services" },
     { label: "Speed", value: "50%", unit: "Faster", desc: "Made image loading twice as fast" },
-    { label: "Scale", value: "500+", unit: "Databases", desc: "Enabled safe updates across systems" },
+    { label: "Scale", value: "560+", unit: "Databases", desc: "Enabled safe updates across systems" },
   ],
   experience: {
     "google-gemini": {
@@ -319,10 +322,9 @@ const LAYMAN_CONTENT = {
       role: "Engineer ensuring Google's network stays healthy",
       description: "Keeping Google's global internet infrastructure monitored and reliable.",
       impact_points: [
-        "Worked effectively in a fast-changing environment while keeping systems stable.",
-        "Collaborated with network teams to improve visibility into system health.",
-        "Built tools to better monitor and alert on network issues.",
-        "Contributed to infrastructure supporting Google's worldwide operations."
+        "Built a system that deliberately breaks things in a controlled way, to prove the network survives real failures.",
+        "Played a key part in moving network monitoring from an old system to a new one.",
+        "Built tools to better monitor and alert on network issues."
       ]
     },
     "google-switzerland": {
@@ -339,8 +341,8 @@ const LAYMAN_CONTENT = {
       role: "Engineer for Google Cloud's app hosting services",
       description: "Made Cloud Run, Cloud Functions, and App Engine more reliable.",
       impact_points: [
-        "Reduced on-call emergency work by over 50% by making data more accessible.",
-        "Enabled safe, gradual updates for 500+ databases, preventing major outages.",
+        "Reduced on-call emergency work by 50% by making data more accessible, while the team took on 40% more services.",
+        "Enabled safe, gradual updates for 560+ databases, preventing major outages.",
         "Created 'Khoj' — an automated problem-investigation tool now used company-wide and still maintained today.",
         "Led the emergency response to a critical security vulnerability (Log4j) for our products."
       ]
