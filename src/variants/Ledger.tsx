@@ -16,6 +16,9 @@ const Expand = ({ children, label = 'expand' }: { children: React.ReactNode; lab
   );
 };
 
+// Bullets always visible per role; the rest sit behind [+N more].
+const KEY_POINTS = 3;
+
 // Compact "Feb '26 - Present" → "2026–"
 const yr = (period: string) => {
   const years = period.match(/'(\d{2})/g)?.map((m) => `20${m.slice(1)}`) ?? [];
@@ -51,9 +54,20 @@ export default function Ledger({ variant, vtClass, onSwitch }: VariantProps) {
                   [{l.label}]{' '}
                 </a>
               ))}
-              <Expand>
+              <ul>
+                {job.impact_points.slice(0, KEY_POINTS).map((p, i) => (
+                  <li key={i}>· {linkify(p)}</li>
+                ))}
+              </ul>
+              <Expand
+                label={
+                  job.impact_points.length > KEY_POINTS
+                    ? `+${job.impact_points.length - KEY_POINTS} more`
+                    : 'skills'
+                }
+              >
                 <ul>
-                  {job.impact_points.map((p, i) => (
+                  {job.impact_points.slice(KEY_POINTS).map((p, i) => (
                     <li key={i}>· {linkify(p)}</li>
                   ))}
                 </ul>

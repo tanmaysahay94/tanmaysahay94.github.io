@@ -19,6 +19,9 @@ const yr = (period: string) => {
   return years[0] ?? period;
 };
 
+// Bullets shown per role in the `head work/*/README` block.
+const README_LINES = 4;
+
 const LOCALES: Record<string, string> = {
   English: 'en_GB', Dutch: 'nl_NL', German: 'de_DE', French: 'fr_FR', Spanish: 'es_ES',
   Hindi: 'hi_IN', Urdu: 'ur_IN', Kannada: 'kn_IN', Sanskrit: 'sa_IN',
@@ -28,7 +31,6 @@ export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
   const { contact, languages } = RESUME_DATA.profile;
   const work = RESUME_DATA.experience.filter((e) => e.type !== 'education');
   const education = RESUME_DATA.experience.find((e) => e.type === 'education');
-  const current = work[0];
   const locales = languages.families
     .flatMap((f) => f.languages.map((l) => LOCALES[l.name] ?? l.name.toLowerCase()))
     .join('  ');
@@ -66,12 +68,19 @@ export default function Terminal({ variant, vtClass, onSwitch }: VariantProps) {
             ))}
           </tbody>
         </table>
-        <Prompt cmd={`cat work/${current.id}/README`} />
+        <Prompt cmd={`head -n ${README_LINES} work/*/README`} />
         <span className="out">
-          {current.impact_points.map((p, i) => (
-            <span key={i}>
-              <span className="dim">·</span> {p}
+          {work.map((job, j) => (
+            <span key={job.id}>
+              {j > 0 && '\n'}
+              <span className="amber">==&gt; work/{job.id}/README &lt;==</span>
               {'\n'}
+              {job.impact_points.slice(0, README_LINES).map((p, i) => (
+                <span key={i}>
+                  <span className="dim">·</span> {p}
+                  {'\n'}
+                </span>
+              ))}
             </span>
           ))}
         </span>
