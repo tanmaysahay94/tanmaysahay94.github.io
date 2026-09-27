@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import './variants.css';
+import Heritage from './Heritage';
 import Ledger from './Ledger';
 import Paper from './Paper';
 import Terminal from './Terminal';
 import CmdK from './CmdK';
-import { VARIANTS, NATIVE_VT, isVariant, isTheme, type Variant, type Theme } from './types';
+import { VARIANTS, NATIVE_VT, DEFAULT_VARIANT, isVariant, isTheme, type Variant, type Theme } from './types';
 
 
-// SSG prerenders 'paper' (richest text for crawlers); the client re-rolls
-// after hydration so every visit lands on a random variant. `?v=` pins a
-// variant; theme (`?t=` / localStorage 'ts-theme') persists across visits.
+// SSG prerenders the default variant (Heritage) and every visitor sees it;
+// `?v=` pins another variant. Theme (`?t=` / localStorage 'ts-theme')
+// persists across visits.
 export default function VariantSite() {
-  const [variant, setVariant] = useState<Variant>('paper');
+  const [variant, setVariant] = useState<Variant>(DEFAULT_VARIANT);
   const [theme, setTheme] = useState<Theme>('native');
   const [prefersDark, setPrefersDark] = useState(false);
 
@@ -38,7 +39,7 @@ export default function VariantSite() {
       if (!alive) return;
       const params = new URLSearchParams(window.location.search);
       const v = params.get('v');
-      setVariant(isVariant(v) ? v : VARIANTS[Math.floor(Math.random() * VARIANTS.length)]);
+      if (isVariant(v)) setVariant(v);
       const t = params.get('t') ?? window.localStorage.getItem('ts-theme');
       if (isTheme(t)) setTheme(t);
     });
@@ -67,7 +68,7 @@ export default function VariantSite() {
     theme === 'native' ? NATIVE_VT[variant]
     : theme === 'auto' ? (prefersDark ? 'vt-dark' : 'vt-light')
     : `vt-${theme}`;
-  const Active = { ledger: Ledger, paper: Paper, terminal: Terminal }[variant];
+  const Active = { heritage: Heritage, ledger: Ledger, paper: Paper, terminal: Terminal }[variant];
   return (
     <>
       <Active variant={variant} vtClass={vtClass} onSwitch={switchTo} />
@@ -96,9 +97,6 @@ export function VariantSwitch({
           </button>
         </span>
       ))}
-      <span className="v-dice" title="A variant is chosen at random on each visit">
-        (random on each visit)
-      </span>
       <span className="v-kbd" aria-hidden="true">⌘K</span>
     </nav>
   );

@@ -6,11 +6,19 @@
    WCAG floors: --text/--muted/--faint/--link >= 4.5:1 on --bg. */
 @import '@fontsource/libre-baskerville';
 @import '@fontsource/ibm-plex-mono';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/eb-garamond/400.css';
+@import '@fontsource/eb-garamond/500.css';
+@import '@fontsource/eb-garamond/400-italic.css';
+@import '@fontsource/tiro-devanagari-hindi/400.css';
 
 :root {
   --v-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --v-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --v-serif: 'Libre Baskerville', 'Iowan Old Style', Palatino, Georgia, serif;
+  --v-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --v-garamond: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --v-deva: 'Tiro Devanagari Hindi', 'Kohinoor Devanagari', serif;
   /* micro-motion tokens (motion = interaction feedback only, never ambience) */
   --v-dur: 160ms;
   --v-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -58,6 +66,13 @@
    Orthogonal to layout: any .vt-* can skin any variant. Selected via ⌘K,
    persisted (ts-theme), deep-linked (?t=). Same token superset as the
    native three, so the contrast gate covers them automatically. ==== */
+/* Heritage (Reliability × Sabyasachi): ivory ground, oxblood, antique gold, bottle green */
+.vt-heritage {
+  --bg: #f2eadb; --surface: #fbf6ec; --text: #2b1416; --muted: #5e433d;
+  --heading: #2b1416; --faint: #5e433d; --link: #7a1f2b; --rule: #c9b48a;
+  --quote-rule: #8a6a1f; /* antique gold: ornament and frame only */
+  --quote-text: #2b1416; --body2: #3d2a26; --ok: #1f3b2d; --bar-text: #5e433d;
+}
 .vt-brockmann {
   --bg: #ffffff; --surface: #f5f5f3; --text: #0b0b0c; --muted: #5b5b5e;
   --heading: #3a3a3e; --faint: #6b6b6e; --link: #1b44e0; --rule: #dcdcd8;
@@ -131,7 +146,6 @@
 .v-switch button:active { transform: scale(0.97); }
 .v-switch button[aria-pressed='true'] { text-decoration: none; font-weight: 700; cursor: default; }
 .v-switch button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
-.v-switch .v-dice { opacity: 0.65; margin-left: 6px; }
 .v-switch .v-kbd { opacity: 0.65; margin-left: 10px; }
 
 /* 44px targets on touch devices (WCAG 2.5.8) without bloating desktop */
@@ -142,6 +156,125 @@
 @media (prefers-reduced-motion: reduce) {
   .v-switch button, .v-ledger .expand, .v-cmdk, .v-cmdk * { transition: none !important; }
   .v-switch button:active { transform: none; }
+}
+
+/* =========================================================
+   VARIANT H — Heritage (default): SRE status page, heritage frame
+   ========================================================= */
+.v-heritage { background: var(--bg); color: var(--text); font-family: var(--v-garamond); min-height: 100vh; }
+.v-heritage .frame {
+  max-width: 1120px; margin: 0 auto; box-sizing: border-box; padding: 64px 72px 44px;
+  display: flex; flex-direction: column; gap: 72px;
+  box-shadow: inset 0 0 0 20px var(--bg), inset 0 0 0 21px var(--quote-rule),
+    inset 0 0 0 26px var(--bg), inset 0 0 0 27px var(--quote-rule);
+}
+.v-heritage a { color: var(--link); }
+.v-heritage a:focus-visible, .v-heritage button:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+.v-heritage .label, .v-heritage .site, .v-heritage .status, .v-heritage .tag {
+  font-family: var(--v-mono); font-size: 12px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--muted);
+}
+.v-heritage .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 24px; }
+.v-heritage .top nav { display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: 18px; }
+.v-heritage .top nav a { color: var(--text); text-decoration: none; }
+.v-heritage .top nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.v-heritage .hero { display: flex; flex-direction: column; gap: 22px; }
+.v-heritage .status { display: flex; align-items: center; gap: 12px; color: var(--link); font-size: 13px; }
+.v-heritage .status .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); }
+.v-heritage .name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 28px; }
+.v-heritage h1 {
+  margin: 0; font-family: var(--v-display); font-weight: 700; color: var(--heading);
+  font-size: clamp(60px, 10vw, 124px); line-height: 0.95; letter-spacing: -0.012em;
+}
+.v-heritage .dev { font-family: var(--v-deva); font-size: clamp(32px, 4vw, 48px); color: var(--link); }
+.v-heritage .orn line, .v-heritage .orn rect { stroke: var(--quote-rule); stroke-width: 1.2; fill: none; }
+.v-heritage .orn circle { fill: var(--link); }
+.v-heritage .lede { margin: 0; max-width: 760px; font-size: clamp(20px, 2.1vw, 26px); line-height: 1.45; }
+.v-heritage .ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+.v-heritage .btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px;
+  box-sizing: border-box; border: 1.5px solid var(--text); border-radius: 2px; background: transparent;
+  color: var(--text); font: 500 18px var(--v-garamond); text-decoration: none; cursor: pointer;
+  transition: opacity var(--v-dur) var(--v-ease);
+}
+.v-heritage .btn:hover { opacity: 0.85; }
+.v-heritage .btn.primary { background: var(--link); border-color: var(--link); color: var(--surface); }
+.v-heritage h2 { margin: 0; font-family: var(--v-display); font-weight: 700; font-size: 40px; color: var(--heading); }
+.v-heritage .sec-head {
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 20px;
+  border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 8px;
+}
+.v-heritage .ruled { border-bottom: 1px solid var(--rule); padding-bottom: 10px; font-size: 34px; margin-bottom: 14px; }
+.v-heritage .row {
+  display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 24px; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--rule) 55%, var(--bg));
+}
+.v-heritage .row:last-of-type { border-bottom: none; }
+.v-heritage .row.ticks { padding: 4px 0; border-bottom: none; }
+.v-heritage .role { font-size: 21px; font-weight: 500; }
+.v-heritage .meta { font-size: 16px; color: var(--muted); }
+.v-heritage .track { position: relative; height: 20px; border-radius: 2px; background: color-mix(in srgb, var(--rule) 40%, var(--bg)); }
+.v-heritage .track.bare { height: 14px; background: none; }
+.v-heritage .track.bare span { position: absolute; top: 0; font-family: var(--v-mono); font-size: 12px; color: var(--muted); }
+.v-heritage .bar { position: absolute; top: 0; height: 100%; border-radius: 2px; }
+.v-heritage .bar.link { background: var(--link); }
+.v-heritage .bar.ok { background: var(--ok); }
+.v-heritage .bar.gold { background: var(--quote-rule); }
+.v-heritage .bar.muted { background: var(--muted); }
+.v-heritage .path { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 18px; }
+.v-heritage .path ol { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.v-heritage .path li + li::before { content: '→'; color: var(--muted); margin-right: 10px; font-family: var(--v-mono); }
+.v-heritage .chip {
+  display: inline-block; padding: 6px 12px; background: var(--surface); border: 1px solid var(--quote-rule);
+  border-radius: 2px; font-family: var(--v-mono); font-size: 15px; color: var(--link);
+}
+.v-heritage .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.v-heritage .card {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 2px; padding: 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.v-heritage .card .tag { color: var(--ok); }
+.v-heritage .card h3 { margin: 0; font-family: var(--v-display); font-weight: 700; font-size: 34px; line-height: 1.05; color: var(--link); }
+.v-heritage .card p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--muted); }
+.v-heritage .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.v-heritage .two p { font-size: 18px; line-height: 1.55; margin: 14px 0 0; }
+.v-heritage blockquote {
+  margin: 16px 0 10px; padding-left: 20px; border-left: 2px solid var(--quote-rule);
+  font-style: italic; font-size: 20px; line-height: 1.5; color: var(--quote-text);
+}
+.v-heritage .who-said { font-size: 16px; color: var(--muted); }
+.v-heritage .honors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.v-heritage .h-title { font-family: var(--v-display); font-weight: 700; font-size: 30px; color: var(--link); }
+.v-heritage .h-detail { font-size: 16px; color: var(--muted); }
+.v-heritage .close {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px;
+  padding-top: 24px; border-top: 1px solid var(--rule);
+}
+.v-heritage .ask { font-family: var(--v-display); font-weight: 700; font-size: 30px; line-height: 1.15; }
+.v-heritage .v-switch { color: var(--muted); margin-top: -40px; }
+
+@media (max-width: 900px) {
+  .v-heritage .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v-heritage .honors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .v-heritage .frame {
+    padding: 36px 28px 32px; gap: 48px;
+    box-shadow: inset 0 0 0 10px var(--bg), inset 0 0 0 11px var(--quote-rule),
+      inset 0 0 0 14px var(--bg), inset 0 0 0 15px var(--quote-rule);
+  }
+  .v-heritage .top nav { font-size: 16px; gap: 6px 16px; }
+  .v-heritage h2 { font-size: 32px; }
+  .v-heritage .row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .v-heritage .row.ticks .who { display: none; }
+  .v-heritage .role { font-size: 18px; }
+  .v-heritage .meta { font-size: 15px; }
+  .v-heritage .track { height: 12px; }
+  .v-heritage .track.bare span { font-size: 11px; }
+  .v-heritage .cards, .v-heritage .two { grid-template-columns: minmax(0, 1fr); }
+  .v-heritage .card h3 { font-size: 28px; }
+  .v-heritage .ctas .btn { flex: 1 1 100%; }
+  .v-heritage .ask { font-size: 26px; }
+  .v-heritage .v-switch { margin-top: -24px; }
 }
 
 /* =========================================================

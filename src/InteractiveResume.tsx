@@ -244,6 +244,26 @@ export const RESUME_DATA = {
       { theme: "automation", count: 1 }
     ]
   },
+  // Heritage view: headline results ("past incidents"). Each line traces to the
+  // approved résumé or to the operator's own words (network chaos testing).
+  highlights: [
+    { tag: "resolved · serverless", title: "Hours → minutes", body: "Incident mitigation time, after Khoj — Google-wide automated root-causing I built with 4 interns." },
+    { tag: "resolved · serverless", title: "−50% oncall", body: "An actionable-metrics framework, while the team onboarded 40% more partner services." },
+    { tag: "resolved · serverless", title: "560+ databases", body: "Progressive rollouts of Spanner schema and config changes; bad changes no longer hit customers globally." },
+    { tag: "resolved · LLM serving", title: "Hermetic ML-Ops", body: "Vertex AI model-serving configs migrated, removing a class of release-time serving outages." },
+    { tag: "chaos test · network", title: "Break it on purpose", body: "A system for Netflix-style chaos-monkey testing of Google's network infrastructure." },
+    { tag: "shipped · monitoring", title: "1 week, not months", body: "The Alert2Bug migration, on existing primitives instead of a bespoke rebuild." }
+  ],
+  independent: [
+    "A multi-agent fleet harness on a generator ≠ evaluator rail: an independent evaluator judges a change by running it, and mutation testing is the primary defect-finder.",
+    "A human-in-the-loop trading engine: 15,001 tests at 82% coverage, 58 MCP tools, every capital-moving path behind an approval gate."
+  ],
+  honors: [
+    { title: "IIIT Hyderabad", detail: "B.Tech, Computer Science · 2013–2017" },
+    { title: "AIR 719", detail: "AIEEE 2013 · top 0.05% of 1.4M" },
+    { title: "9th of 3000+", detail: "ICPC 2016, Kharagpur online" },
+    { title: "Top 20", detail: "CodeChef Long Challenge" }
+  ],
   kudos: [
     {
       id: "kudo-1",

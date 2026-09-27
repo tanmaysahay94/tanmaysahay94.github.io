@@ -28,28 +28,30 @@ Always run `npm run lint && npm run build && npm test` before pushing. A pre-pus
 React 19 + TypeScript + Vite, prerendered to static HTML by **vite-react-ssg**
 (the `build` script). Deployed to GitHub Pages at https://tanmaysahay.com/.
 
-### The three-variant system (2026-07 redesign)
+### The four-variant system (Heritage default since 2026-09-27)
 
-The homepage is one of THREE full "skins" of the same data, **rolled at
-random on every visit** (`?v=` pins one; in-page switcher + ⌘K change it):
+Every visitor lands on **Heritage**; `?v=` pins another variant (in-page
+switcher + ⌘K change it). There is no random roll any more.
 
+- `src/variants/Heritage.tsx` — DEFAULT and SSG-canonical (crawlers get it).
+  "Reliability × Sabyasachi": SRE status page (uptime timeline per role,
+  "past incidents" = `RESUME_DATA.highlights`) in an ivory/oxblood/gold frame.
+  Designed on the Claude Design canvas https://claude.ai/artifact/Aub8zX7fSSEFCw2Rp4bjfn
 - `src/variants/Ledger.tsx` — brutalist calling card (660px, [expand] toggles)
-- `src/variants/Paper.tsx` — serif "paper"; SSG-canonical (crawlers get this);
-  `@media print` makes it the printable résumé
+- `src/variants/Paper.tsx` — serif "paper"; `@media print` makes it the printable résumé
 - `src/variants/Terminal.tsx` — amber SRE console (tmux bar, shell session)
 
-`src/variants/VariantSite.tsx` owns variant+theme state. The random roll runs
-in `queueMicrotask`, NOT `requestAnimationFrame` (rAF is paused in unfocused
-tabs — background-opened visits would stick on the SSG default).
+`src/variants/VariantSite.tsx` owns variant+theme state; `DEFAULT_VARIANT`
+lives in `types.ts`.
 
 ### Themes (orthogonal axis)
 
-11 themes × 3 layouts. Token classes `.vt-*` in `src/variants/variants.css`
+11 themes × 4 layouts. Token classes `.vt-*` in `src/variants/variants.css`
 are the single source of color truth (paise-banao token contract): layout
 rules consume `var(--token)` only — **a raw hex outside `.vt-*` is a bug**.
-Themes: 3 natives + light/dark/auto/midnight/terminal + the 5 design-swarm
+Themes: 4 natives (incl. `vt-heritage`) + light/dark/auto/midnight/terminal + the 5 design-swarm
 palettes (brockmann/bulldog/hanko/vanderbilt/aftermarket). Theme persists in
-`localStorage['ts-theme']`, deep-links via `?t=`; variant stays random.
+`localStorage['ts-theme']`, deep-links via `?t=`.
 `src/variants/contrast.test.ts` parses the CSS and CI-fails any text token
 under WCAG 4.5:1 — it discovers `.vt-*` blocks automatically, so new themes
 are gated for free.
@@ -58,10 +60,10 @@ are gated for free.
 
 - `RESUME_DATA` (and `ScrambledText`, `linkify`) live in
   `src/InteractiveResume.tsx` — a RETIRED component kept as the data home.
-  All three variants render from it; edit data there, all skins update.
+  All four variants render from it; edit data there, all skins update.
 - Evidence links per role: `src/variants/links.ts` (real URLs only).
 - `public/resume.pdf` — sanitized build (phone stripped) of
-  `~/Sandbox/resume/TanmaySahayTexResume.tex` via tectonic. NOTE: the repo
+  `~/Sandbox/resume/TanmaySahayResume_FrontierLab.tex` via tectonic. NOTE: the repo
   gitignores `*.pdf`; this file is force-added (`git add -f`).
 - Email/phone are NEVER plaintext in static HTML — `ScrambledText`
   unscrambles on click; the ⌘K "email" action builds its mailto at click

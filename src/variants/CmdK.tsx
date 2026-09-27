@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { RESUME_DATA } from '../InteractiveResume';
 import { PROFILE_LINKS } from './links';
-import { THEMES, type Theme, type Variant } from './types';
+import { THEMES, VARIANTS, type Theme, type Variant } from './types';
 
 type Action = { id: string; label: string; hint: string; run: () => void };
 
@@ -48,7 +48,7 @@ export default function CmdK({
 
   const close = () => setOpen(false);
   const actions: Action[] = [
-    ...(['ledger', 'paper', 'terminal'] as const).map((v) => ({
+    ...VARIANTS.map((v) => ({
       id: `view-${v}`,
       label: `${v === variant ? '● ' : ''}switch view: ${v}`,
       hint: 'view',
