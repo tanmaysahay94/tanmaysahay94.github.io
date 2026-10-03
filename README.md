@@ -12,7 +12,7 @@ crawlers and link previews get real content, and the client hydrates it. GitHub 
 2. Four **layouts** (variants) render that same data: Heritage (the default), Ledger, Paper, and Terminal.
 3. Eleven colour **themes** are an independent axis: CSS token classes (`.vt-*`) in `src/variants/variants.css`.
 4. `src/variants/VariantSite.tsx` picks the layout (`?v=`) and the theme (`?t=` or `localStorage`).
-5. A push to `main` runs the checks, builds the static site, and deploys it to GitHub Pages.
+5. Before a push leaves the machine, a git hook runs lint, build and test; GitHub Actions then builds the static site and deploys it to GitHub Pages.
 
 ## Architecture
 
@@ -36,6 +36,7 @@ flowchart LR
   data --> layouts
   data --> cmdk
   links --> layouts
+  links --> cmdk
   css --> layouts
 ```
 
@@ -78,7 +79,7 @@ flowchart LR
   deploy --> live["tanmaysahay.com<br/>public/CNAME"]
 ```
 
-There is no separate deploy command: every push to `main` deploys to production. Never use `gh-pages`
+The tests run in the local pre-push hook; the CI job itself only installs and builds. There is no separate deploy command: every push to `main` deploys to production. Never use `gh-pages`
 or force-push build output to `main`.
 
 ## Quickstart
