@@ -174,20 +174,20 @@ export const RESUME_DATA = {
         "Built an actionable-metrics framework that democratized signal across SRE and partner teams, driving a 50% reduction in oncall load while the team onboarded 40% more partner services.",
         "Drove down resource ceilings across all Serverless Bigtables by adopting Autocap, materially improving fleet-wide compute efficiency.",
         "Led the Log4J code-red response across four Serverless products under incident pressure.",
-        "Led 4 interns to build Khoj, a Google-wide automated incident root-causing system that reduced mean time to response and mitigation from multiple hours to just minutes."
+        "Co-built Khoj, a Google-wide automated incident root-causing system that reduced mean time to response and mitigation from multiple hours to just minutes."
       ],
       skills: ["Serverless", "Spanner", "Incident Management", "Mentoring"]
     },
     {
       id: "khoj-project",
       company: "Google (Internal Project)",
-      role: "Creator & Lead Developer — Khoj (InvDash)",
+      role: "Co-builder — Khoj (InvDash)",
       period: "2021 - Present",
       location: "Global",
       type: "work",
       description: "Built and continuously evolved an automated incident investigation and root-causing system.",
       impact_points: [
-        "Conceived and built Khoj in 2021 to automate tedious incident root-cause analysis.",
+        "Co-built Khoj in 2021 to automate tedious incident root-cause analysis.",
         "System correlates logs, metrics, and change events to surface probable causes during outages.",
         "Adopted Google-wide across multiple SRE teams, significantly reducing Mean Time To Diagnose (MTTD).",
         "Continuously maintained and enhanced over 4+ years, adapting to new infrastructure patterns."
@@ -247,7 +247,7 @@ export const RESUME_DATA = {
   // Heritage view: headline results ("past incidents"). Each line traces to the
   // approved résumé or to the operator's own words (network chaos testing).
   highlights: [
-    { tag: "resolved · serverless", title: "Hours → minutes", body: "Incident mitigation time, after Khoj — Google-wide automated root-causing I built with 4 interns." },
+    { tag: "resolved · serverless", title: "Hours → minutes", body: "Incident mitigation time, after Khoj — Google-wide automated root-causing I co-built." },
     { tag: "resolved · serverless", title: "−50% oncall", body: "An actionable-metrics framework, while the team onboarded 40% more partner services." },
     { tag: "resolved · serverless", title: "560+ databases", body: "Progressive rollouts of Spanner schema and config changes; bad changes no longer hit customers globally." },
     { tag: "resolved · LLM serving", title: "Hermetic ML-Ops", body: "Vertex AI model-serving configs migrated, removing a class of release-time serving outages." },
@@ -363,7 +363,7 @@ const LAYMAN_CONTENT = {
       impact_points: [
         "Reduced on-call emergency work by 50% by making data more accessible, while the team took on 40% more services.",
         "Enabled safe, gradual updates for 560+ databases, preventing major outages.",
-        "Created 'Khoj' — an automated problem-investigation tool now used company-wide and still maintained today.",
+        "Co-built 'Khoj' — an automated problem-investigation tool now used company-wide and still maintained today.",
         "Led the emergency response to a critical security vulnerability (Log4j) for our products."
       ]
     },
@@ -371,7 +371,7 @@ const LAYMAN_CONTENT = {
       role: "Creator of automated investigation tool",
       description: "Built and continuously improved a tool that automatically finds the cause of system problems.",
       impact_points: [
-        "Conceived and built Khoj in 2021 to automate tedious problem investigation.",
+        "Co-built Khoj in 2021 to automate tedious problem investigation.",
         "The tool connects logs, measurements, and changes to surface likely causes during outages.",
         "Adopted company-wide across engineering teams, significantly speeding up problem diagnosis.",
         "Continuously maintained and improved over 4+ years, adapting to new systems."
