@@ -185,7 +185,7 @@ export const RESUME_DATA = {
       period: "2021 - Present",
       location: "Global",
       type: "work",
-      description: "Built and continuously evolved an automated incident investigation and root-causing system.",
+      description: "Co-built and continuously evolved an automated incident investigation and root-causing system.",
       impact_points: [
         "Co-built Khoj in 2021 to automate tedious incident root-cause analysis.",
         "System correlates logs, metrics, and change events to surface probable causes during outages.",
@@ -368,8 +368,8 @@ const LAYMAN_CONTENT = {
       ]
     },
     "khoj-project": {
-      role: "Creator of automated investigation tool",
-      description: "Built and continuously improved a tool that automatically finds the cause of system problems.",
+      role: "Co-builder of automated investigation tool",
+      description: "Co-built and continuously improved a tool that automatically finds the cause of system problems.",
       impact_points: [
         "Co-built Khoj in 2021 to automate tedious problem investigation.",
         "The tool connects logs, measurements, and changes to surface likely causes during outages.",
